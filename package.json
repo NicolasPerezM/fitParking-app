@@ -15,6 +15,7 @@
     "@babel/core": "^7.25.2",
     "@babel/node": "^7.25.0",
     "@babel/preset-env": "^7.25.4",
+    "@hapi/boom": "^10.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
