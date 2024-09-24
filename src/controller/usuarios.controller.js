@@ -3,25 +3,30 @@ import pool from '../database/database.js';
 import boom from '@hapi/boom';
 
 //read all
-export const getUsers = async (req, res) => {
+export const getUsers = async (req, res, next) => {
+    
     try{
         const [result] = await pool.query('SELECT * FROM usuarios');
         res.status(201).json(result);
     }
     catch(err) {
-        boom.notFound(err.message);
+        next(err);
     }
 }
 
 //read by ID
-export const getUserById = async (req, res) => {
+export const getUserById = async (req, res, next) => {
     try{
         const {id} = req.params;
         const [result] = await pool.query('SELECT * FROM usuarios WHERE idUsuarios = ?', [id]);
-        res.status(201).json(result);
+        if (result.length === 0) {
+           throw new Error('User not found');
+        }
+
+        res.status(200).json(result);
     }
     catch(err) {
-        res.status(500).json({message: err.message});
+        next(err);
     }
 }
 
