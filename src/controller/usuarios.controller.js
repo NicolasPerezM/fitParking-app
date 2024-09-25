@@ -33,15 +33,18 @@ export const getUserById = async (req, res, next) => {
 }
 
 //create
-export const createUser = async (req, res) => {
+export const createUser = async (req, res, next) => {
     try{
         const {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono, FechaDeNacimiento} = req.body;
         const newUser = {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono, FechaDeNacimiento};
         const [result] = await pool.query('INSERT INTO usuarios SET ?', [newUser]);
+        if(result.affectedRows === 0) {
+            throw new Error('User not created');
+        }
         res.status(201).json({id: result.insertId, ...newUser});
     }
     catch(err){
-        res.status(500).json({message: err.message});
+        next(err);
     }
 }
 
@@ -65,7 +68,7 @@ export const deleteUser = async (req, res, next) => {
 
 //update
 
-export const updateUser = async (req, res) => {
+export const updateUser = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { Nombres, Apellidos, CorreoElectronico, Direccion, Telefono, FechaDeNacimiento } = req.body;
@@ -87,10 +90,13 @@ export const updateUser = async (req, res) => {
 
         // Ejecutar la consulta de actualización
         const [result] = await pool.query('UPDATE usuarios SET ? WHERE idUsuarios = ?', [updateUser, id]);
+        if(result.affectedRows === 0) {
+            throw new Error('User not found');
+        }
 
         res.sendStatus(204);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     }
 };
 
