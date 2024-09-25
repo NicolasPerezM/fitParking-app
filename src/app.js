@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.set('port', process.env.PORT || 3000);
 
 //rutas
-app.get('/api/v1/usuarios', usuariosRoutes);
+//app.get('/api/v1/usuarios', usuariosRoutes);
 app.use('/api/v1/usuarios', usuariosRoutes);
 
 //middlewares

@@ -4,9 +4,11 @@ import boom from '@hapi/boom';
 
 //read all
 export const getUsers = async (req, res, next) => {
-    
     try{
         const [result] = await pool.query('SELECT * FROM usuarios');
+        if (result.length === 0) {
+            throw new Error('Users not found');
+        }
         res.status(201).json(result);
     }
     catch(err) {
@@ -45,16 +47,18 @@ export const createUser = async (req, res) => {
 
 //delete
 
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res, next) => {
     try{
         const {id} = req.params;
         const [result] = await pool.query('DELETE FROM usuarios WHERE idUsuarios = ?', [id]);
-        if(result.affectedRows === 0) return res.status(404).json({message: 'User not found'});
+        if(result.affectedRows === 0) {
+            throw new Error('User not found');
+        }
         res.sendStatus(204);
 
     }
     catch(err) {
-        res.status(500).json({message: err.message});
+        next(err);
     }
 }
 
