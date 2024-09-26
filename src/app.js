@@ -50,6 +50,7 @@ app.use(errorHandler);
 
 //documentos publicos
 app.use(express.static(join(__dirname, 'public')));
+app.use('/css', express.static(join(__dirname, 'public/css')));
 
 //exportar
 export default app;
