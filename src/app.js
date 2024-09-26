@@ -28,25 +28,28 @@ app.set('layout', 'layouts/layout');
 app.set('view engine', 'ejs');
 app.set('views', join(__dirname, 'views'));
 
-//rutas
-//app.get('/api/v1/usuarios', usuariosRoutes);
-app.get('/', (req, res) => {
-    res.render('index');
-});
-
-app.get('/api/v1/crearUsuario', (req, res) => {
-    res.render('crearUsuario', { layout: './layouts/sidebar' });
-});
-
-app.use('/api/v1/usuarios', usuariosRoutes);
-
-
 //middlewares
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(logErrors);
 app.use(errorHandler);
+
+//rutas
+
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.get('/api/v1/usuarios/crearUsuario', (req, res) => {
+    res.render('crearUsuario', { layout: './layouts/sidebar' });
+});
+
+app.get('/api/v1/usuarios', usuariosRoutes);
+app.use('/api/v1/usuarios', usuariosRoutes);
+
+
+
 
 //documentos publicos
 app.use(express.static(join(__dirname, 'public')));

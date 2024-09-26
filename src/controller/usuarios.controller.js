@@ -35,8 +35,9 @@ export const getUserById = async (req, res, next) => {
 //create
 export const createUser = async (req, res, next) => {
     try{
-        const {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono, FechaDeNacimiento} = req.body;
-        const newUser = {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono, FechaDeNacimiento};
+        console.log(req.body);
+        const {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono} = req.body;
+        const newUser = {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono};
         const [result] = await pool.query('INSERT INTO usuarios SET ?', [newUser]);
         if(result.affectedRows === 0) {
             throw new Error('User not created');
