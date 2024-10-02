@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import {join, dirname} from 'path'
 import { fileURLToPath } from 'url';
 import usuariosRoutes from './routes/usuarios.route.js';
-import { logErrors, errorHandler } from '../middlewares/error.handler.js';
+import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
 
 //Inicializaciones
@@ -32,8 +32,7 @@ app.set('views', join(__dirname, 'views'));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(logErrors);
-app.use(errorHandler);
+
 
 //rutas
 
@@ -48,8 +47,11 @@ app.get('/api/v1/usuarios/crearUsuario', (req, res) => {
 app.get('/api/v1/usuarios', usuariosRoutes);
 app.use('/api/v1/usuarios', usuariosRoutes);
 
+//middlewares-err
 
-
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);
 
 //documentos publicos
 app.use(express.static(join(__dirname, 'public')));

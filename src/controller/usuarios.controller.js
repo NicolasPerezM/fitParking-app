@@ -7,7 +7,7 @@ export const getUsers = async (req, res, next) => {
     try{
         const [result] = await pool.query('SELECT * FROM usuarios');
         if (result.length === 0) {
-            throw new Error('Users not found');
+            throw boom.notFound('No hay usuarios');
         }
         res.status(201).json(result);
     }
@@ -22,7 +22,7 @@ export const getUserById = async (req, res, next) => {
         const {id} = req.params;
         const [result] = await pool.query('SELECT * FROM usuarios WHERE idUsuarios = ?', [id]);
         if (result.length === 0) {
-           throw new Error('User not found');
+           throw boom.notFound('Ususario no encontrado');
         }
 
         res.status(200).json(result);
@@ -40,7 +40,7 @@ export const createUser = async (req, res, next) => {
         const newUser = {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono};
         const [result] = await pool.query('INSERT INTO usuarios SET ?', [newUser]);
         if(result.affectedRows === 0) {
-            throw new Error('User not created');
+            throw boom.notFound('Usuario no creado');
         }
         res.status(201).json({id: result.insertId, ...newUser});
     }
@@ -56,7 +56,7 @@ export const deleteUser = async (req, res, next) => {
         const {id} = req.params;
         const [result] = await pool.query('DELETE FROM usuarios WHERE idUsuarios = ?', [id]);
         if(result.affectedRows === 0) {
-            throw new Error('User not found');
+            throw boom.notFound('Usuario no encontrado');
         }
         res.sendStatus(204);
 
@@ -92,7 +92,7 @@ export const updateUser = async (req, res, next) => {
         // Ejecutar la consulta de actualización
         const [result] = await pool.query('UPDATE usuarios SET ? WHERE idUsuarios = ?', [updateUser, id]);
         if(result.affectedRows === 0) {
-            throw new Error('User not found');
+            throw boom.badRequest('Usuario no actualizado');
         }
 
         res.sendStatus(204);
