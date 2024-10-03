@@ -2,6 +2,7 @@
 import pool from '../database/database.js';
 import boom from '@hapi/boom';
 
+
 //read all
 export const getUsers = async (req, res, next) => {
     try{
