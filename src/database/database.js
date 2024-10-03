@@ -1,4 +1,4 @@
-import {createPool} from 'mysql2/promise';
+/*import {createPool} from 'mysql2/promise';
 import config from '../config.js';
 
 
@@ -11,4 +11,4 @@ const pool = createPool({
 
 const getPool = () => {return pool;}
 
-export default pool;
+export default pool;*/

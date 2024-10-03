@@ -1,16 +1,18 @@
 
-import pool from '../database/database.js';
+//import pool from '../database/database.js';
 import boom from '@hapi/boom';
+import sequelize from '../../libs/sequelize.js';
+import { models } from '../../libs/sequelize.js';
 
 
 //read all
 export const getUsers = async (req, res, next) => {
     try{
-        const [result] = await pool.query('SELECT * FROM usuarios');
-        if (result.length === 0) {
+        const rta = await models.Usuario.findAll();
+        if (rta.length === 0) {
             throw boom.notFound('No hay usuarios');
         }
-        res.status(201).json(result);
+        res.status(201).json(rta);
     }
     catch(err) {
         next(err);
@@ -37,13 +39,13 @@ export const getUserById = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
     try{
         console.log(req.body);
-        const {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono} = req.body;
-        const newUser = {idUsuarios, Nombres, Apellidos, CorreoElectronico, Direccion, Telefono};
-        const [result] = await pool.query('INSERT INTO usuarios SET ?', [newUser]);
-        if(result.affectedRows === 0) {
+        const {Nombres, Apellidos, CorreoElectronico, Telefono} = req.body;
+        const data = {Nombres, Apellidos, CorreoElectronico, Telefono};
+        const newUser = await models.Usuario.create(data);
+        if(!newUser) {
             throw boom.notFound('Usuario no creado');
         }
-        res.status(201).json({id: result.insertId, ...newUser});
+        res.status(201).json(newUser);
     }
     catch(err){
         next(err);
