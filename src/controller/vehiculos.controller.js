@@ -90,4 +90,4 @@ export const methodsVehicles = {
     createVehicle,
     deleteVehicle,
     updateVehicle
-}
+};
