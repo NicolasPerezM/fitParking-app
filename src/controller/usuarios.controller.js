@@ -37,7 +37,6 @@ export const getUserById = async (req, res, next) => {
 //create
 export const createUser = async (req, res, next) => {
     try{
-        console.log(req.body);
         const {Nombres, Apellidos, CorreoElectronico, Telefono} = req.body;
         const data = {Nombres, Apellidos, CorreoElectronico, Telefono};
         const newUser = await models.Usuario.create(data);
