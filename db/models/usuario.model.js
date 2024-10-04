@@ -2,7 +2,8 @@ import { Model, DataTypes, Sequelize } from 'sequelize';
 
 const USUARIO_TABLE = 'usuarios';
 const userSchema ={
-    id: {
+    idUsuario: {
+        field: 'id_usuario',
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -31,13 +32,13 @@ const userSchema ={
         }
 
     },
-    contraseña:{
+    Contrasena: {
         allowNull: false,
         type: DataTypes.STRING
     },
     rol: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('usuario', 'admin'),
         defaultValue: 'usuario'
     },
     createdAt: {

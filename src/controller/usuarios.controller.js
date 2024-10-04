@@ -37,8 +37,8 @@ export const getUserById = async (req, res, next) => {
 //create
 export const createUser = async (req, res, next) => {
     try{
-        const {Nombres, Apellidos, CorreoElectronico, Telefono} = req.body;
-        const data = {Nombres, Apellidos, CorreoElectronico, Telefono};
+        const {Nombres, Apellidos, CorreoElectronico, Contrasena, Telefono} = req.body;
+        const data = {Nombres, Apellidos, CorreoElectronico, Contrasena, Telefono};
         const newUser = await models.Usuario.create(data);
         if(!newUser) {
             throw boom.notFound('Usuario no creado');

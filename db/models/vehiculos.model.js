@@ -1,14 +1,26 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
+import { USUARIO_TABLE } from './usuario.model.js'
 
 const VEHICULOS_TABLE = 'vehiculos';
 
 const vehiculosSchema = { 
-    id: {
+    idVehiculo: {
+        field: 'id_vehiculo',
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
     },
+    idUsuario: {
+        field: 'id_usuario',
+        type: DataTypes.INTEGER,
+        references: {
+            model: USUARIO_TABLE,
+            key: 'id_usuario'
+        },
+        onaUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+    }, 
     marca: {
         allowNull: false,
         type: DataTypes.STRING
@@ -18,7 +30,7 @@ const vehiculosSchema = {
         type: DataTypes.STRING
     },
     color: {
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING
     },
     placa: {
@@ -33,6 +45,10 @@ const vehiculosSchema = {
 }
 
 class Vehiculos extends Model {
+    static associate(models) {
+        //relacion 1-1
+        //this.belongsTo(models.Reserva, {as: 'reserva', foreignKey: 'id'});
+    }
     static config(sequelize) {
         return {
             sequelize,
