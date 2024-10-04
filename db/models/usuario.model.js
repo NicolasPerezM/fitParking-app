@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
 
-const USUARIO_TABLE = 'usuarioss';
+const USUARIO_TABLE = 'usuarios';
 const userSchema ={
     id: {
         allowNull: false,
@@ -16,6 +16,10 @@ const userSchema ={
         allowNull: false,
         type: DataTypes.STRING
     },
+    Telefono: {
+        allowNull: true,
+        type: DataTypes.STRING
+    },
     CorreoElectronico: {
         allowNull: true,
         type: DataTypes.STRING,
@@ -27,11 +31,22 @@ const userSchema ={
         }
 
     },
-    Telefono: {
-        allowNull: true,
+    contraseña:{
+        allowNull: false,
         type: DataTypes.STRING
     },
-}
+    rol: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        defaultValue: 'usuario'
+    },
+    createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+        field: 'created_at',
+        defaultValue: Sequelize.NOW
+    }
+};
 
 class Usuario extends Model {
     static associate(models) {

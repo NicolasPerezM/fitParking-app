@@ -14,7 +14,7 @@ const vehiculosSchema = {
         type: DataTypes.STRING
     },
     modelo: {
-        allowNull: false,
+        allowNull: true,
         type: DataTypes.STRING
     },
     color: {
