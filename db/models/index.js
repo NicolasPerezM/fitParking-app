@@ -6,6 +6,7 @@ import { reservaSchema, Reserva } from './reservas.model.js';
 import { HistorialParqueo, historialParqueoSchema } from './historialParqueo.model.js';
 import { Incidencias, incidenciasSchema } from './incidencias.model.js';
 import { Feedback, feedbackSchema } from './feedback.model.js';
+import { Pagos, pagosSchema } from './pagos.model.js';
 
 function setUpModels(sequelize){
     Usuario.init(userSchema, Usuario.config(sequelize));
@@ -16,6 +17,7 @@ function setUpModels(sequelize){
     HistorialParqueo.init(historialParqueoSchema, HistorialParqueo.config(sequelize));
     Incidencias.init(incidenciasSchema, Incidencias.config(sequelize));
     Feedback.init(feedbackSchema, Feedback.config(sequelize));
+    Pagos.init(pagosSchema, Pagos.config(sequelize));
 
     Vehiculos.associate(sequelize.models);
     Usuario.associate(sequelize.models);
