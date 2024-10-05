@@ -2,7 +2,10 @@ import { Usuario, userSchema } from './usuario.model.js';
 import { Vehiculos, vehiculosSchema } from './vehiculos.model.js';
 import { Lote, loteSchema } from './lote.model.js';
 import { EspacioParqueo, espacioParqueoSchema } from './espacioParqueo.model.js'; 
-import { reservaSchema, Reserva } from './reservas.model.js';  
+import { reservaSchema, Reserva } from './reservas.model.js';
+import { HistorialParqueo, historialParqueoSchema } from './historialParqueo.model.js';
+import { Incidencias, incidenciasSchema } from './incidencias.model.js';
+import { Feedback, feedbackSchema } from './feedback.model.js';
 
 function setUpModels(sequelize){
     Usuario.init(userSchema, Usuario.config(sequelize));
@@ -10,7 +13,9 @@ function setUpModels(sequelize){
     Lote.init(loteSchema, Lote.config(sequelize));
     EspacioParqueo.init(espacioParqueoSchema, EspacioParqueo.config(sequelize));
     Reserva.init(reservaSchema, Reserva.config(sequelize));
-
+    HistorialParqueo.init(historialParqueoSchema, HistorialParqueo.config(sequelize));
+    Incidencias.init(incidenciasSchema, Incidencias.config(sequelize));
+    Feedback.init(feedbackSchema, Feedback.config(sequelize));
 
     Vehiculos.associate(sequelize.models);
     Usuario.associate(sequelize.models);

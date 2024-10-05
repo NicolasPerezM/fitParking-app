@@ -1,13 +1,15 @@
+
 import { Model, DataTypes, Sequelize } from 'sequelize';
 import { USUARIO_TABLE } from './usuario.model.js';
 import { VEHICULOS_TABLE } from './vehiculos.model.js';
 import { ESPACIOPARQUEO_TABLE } from './espacioParqueo.model.js';
 
-const RESERVAS_TABLE = 'reservas';
-const reservaSchema = {
+const HISTORIAL_PARQUEO_TABLE = 'historial_parqueo';
 
-    idReserva:{
-        field: 'id_reserva',
+const historialParqueoSchema = {
+
+    idHistorial: {
+        field: 'id_historial',
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -43,39 +45,29 @@ const reservaSchema = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
     },
-    fechaInicio: {
+    fechaEntrada: {
         allowNull: false,
         type: DataTypes.DATE
     },
-    fechaFin: {
-        allowNull: false,
+    fechaSalida: {
+        allowNull: true,
         type: DataTypes.DATE
-    },
-    estadoReserva: {
-        field: 'estado_reserva',
-        type: DataTypes.ENUM('pendiente', 'cancelada', 'activa'),
-        defaultValue: 'activa'
-    },
-    fechaCreacion: {
-        allowNull: false,
-        type: DataTypes.DATE,
-        defaultValue: Sequelize.NOW
-    },    
+    }
 }
 
-class Reserva extends Model {
+class HistorialParqueo extends Model {
     static associate(models) {
-
+        
     }
 
-    static config(sequelize) {
-        return {
+    static config(sequelize){
+        return{
             sequelize,
-            tableName: RESERVAS_TABLE,
-            modelName: 'Reserva',
+            tableName: HISTORIAL_PARQUEO_TABLE,
+            modelName: 'HistorialParqueo',
             timestamps: false
         }
     }
 }
 
-export { RESERVAS_TABLE, reservaSchema, Reserva }
+export { HISTORIAL_PARQUEO_TABLE, historialParqueoSchema, HistorialParqueo }

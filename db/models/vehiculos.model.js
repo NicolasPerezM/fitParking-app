@@ -18,7 +18,7 @@ const vehiculosSchema = {
             model: USUARIO_TABLE,
             key: 'id_usuario'
         },
-        onaUpdate: 'CASCADE',
+        onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
     }, 
     marca: {

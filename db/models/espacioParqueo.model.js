@@ -19,7 +19,7 @@ const espacioParqueoSchema = {
             model: LOTES_TABLE,
             key: 'id_lote'
         },
-        onaUpdate: 'CASCADE',
+        onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
     },
     estado: {
