@@ -1,5 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { USUARIO_TABLE } from './usuario.model.js';
+import { HISTORIAL_PARQUEO_TABLE } from './historialParqueo.model.js';
 
 const PAGOS_TABLE = 'pagos';
 
@@ -18,6 +19,18 @@ const pagosSchema = {
             model: USUARIO_TABLE,
             key: 'id_usuario'
         },
+        unique: true,
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+    },
+    idHistorial: {
+        field: 'id_historial',
+        type: DataTypes.INTEGER,
+        references: {
+            model: HISTORIAL_PARQUEO_TABLE,
+            key: 'id_historial'
+        },
+        unique: true,
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
     },
@@ -39,7 +52,8 @@ const pagosSchema = {
 
 class Pagos extends Model {
     static associate(models) {
-        //this.belongsTo(models.Usuarios, { as: 'usuario' });
+        this.belongsTo(models.Usuario, { as: 'Usuarios' });
+        this.belongsTo(models.HistorialParqueo, { as: 'HistorialParqueo' });
     }
 
     static config(sequelize){

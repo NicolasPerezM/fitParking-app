@@ -52,12 +52,20 @@ const historialParqueoSchema = {
     fechaSalida: {
         allowNull: true,
         type: DataTypes.DATE
+    },
+    tipoIngreso: {
+        field: 'tipo_ingreso',
+        allowNull: false,
+        type: DataTypes.ENUM('sin_reserva', 'con_reserva')
     }
 }
 
 class HistorialParqueo extends Model {
     static associate(models) {
-        
+        this.hasOne(models.Pagos, {
+            as: 'pagos',
+            foreignKey: 'idHistorial'
+        })
     }
 
     static config(sequelize){
