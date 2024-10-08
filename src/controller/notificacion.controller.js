@@ -35,7 +35,7 @@ const getNotificationById = async(req, res, next) => {
 
 // create
 
-const createNorificacion = async(req, res, next) => {
+const createNotificacion = async(req, res, next) => {
     try{
         const {mensaje, tipoNotificacion} = req.body;
         const data = {mensaje, tipoNotificacion};
@@ -70,6 +70,6 @@ const deleteNotificacion = async(req, res, next) => {
 export const methodsNotificacion = {
     getNotificacion,
     getNotificationById,
-    createNorificacion,
+    createNotificacion,
     deleteNotificacion
 }
