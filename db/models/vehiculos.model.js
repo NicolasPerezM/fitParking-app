@@ -59,4 +59,4 @@ class Vehiculos extends Model {
     }
 }   
 
-export { Vehiculos, vehiculosSchema, VEHICULOS_TABLE};
+export { Vehiculos, vehiculosSchema, VEHICULOS_TABLE };

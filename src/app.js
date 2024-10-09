@@ -4,6 +4,7 @@ import {join, dirname} from 'path'
 import { fileURLToPath } from 'url';
 import usuariosRoutes from './routes/usuarios.route.js';
 import vehiculosRoutes from './routes/vehiculos.route.js';
+import reservasRoutes from './routes/reserva.route.js';
 import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
 
@@ -48,7 +49,7 @@ app.get('/api/v1/usuarios/crearUsuario', (req, res) => {
 //app.get('/api/v1/usuarios', usuariosRoutes);
 app.use('/api/v1/usuarios', usuariosRoutes);
 app.use('/api/v1/vehiculos', vehiculosRoutes);
-
+app.use('/api/v1/reservas', reservasRoutes);
 
 //middlewares-err
 

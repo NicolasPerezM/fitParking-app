@@ -5,7 +5,7 @@ import { models } from '../../libs/sequelize.js';
 
 const getReservas = async(req, res, next) => {
     try{
-        const rta = await models.Reservas.findAll();
+        const rta = await models.Reserva.findAll();
         if(rta.length === 0){
             throw boom.notFound('No hay reservas');
         }
@@ -20,8 +20,8 @@ const getReservas = async(req, res, next) => {
 
 const getReservaById = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Reservas.findOne({where: {id: id}});
+        const { idReserva } = req.params;
+        const rta = await models.Reserva.findByPk(idReserva);
         if(!rta) {
             throw boom.notFound('Reserva no encontrada');
         }
@@ -38,7 +38,7 @@ const createReserva = async(req, res, next) => {
     try{
         const {fechaInicio, fechaFin, estadoReserva} = req.body;
         const data = {fechaInicio, fechaFin, estadoReserva};
-        const newReserva = await models.Reservas.create(data);
+        const newReserva = await models.Reserva.create(data);
         if(!newReserva) {
             throw boom.badRequest('Reserva no creada')
         }
@@ -53,12 +53,14 @@ const createReserva = async(req, res, next) => {
 
 const deleteReserva = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Reserva.destroy({where: {id:id}});
+        const { idReserva } = req.params;
+        const rta = await models.Reserva.destroy({
+            where: { idReserva:idReserva }
+        });
         if(!rta){
             throw boom.notFound('Reserva no encontrada')
         }
-        res.status(204);
+        res.sendStatus(204)
     }
     catch(err){
         next(err);
@@ -67,26 +69,20 @@ const deleteReserva = async(req, res, next) => {
 
 //update
 
-const updateReserva = async(req, res, next) => {
-    try{
-        const { id } = req.params;
+const updateReserva = async (req, res, next) => {
+    try {
+        const { idReserva } = req.params;
         const { fechaInicio, fechaFin, estadoReserva } = req.body;
-
-        const updateReserva = {
-            ...(fechaInicio && {fechaInicio}),
-            ...(fechaFin && {fechaFin}),
-            ...(estadoReserva && {estadoReserva})
+        const data = { fechaInicio, fechaFin, estadoReserva };
+        const updateVehicle = await models.Reserva.update(data, {
+            where: { idReserva: idReserva }
+        });
+        if (!updateVehicle) {
+            throw boom.badRequest('Reserva no actualizada');
         }
-
-        if(Object.keys(updateReserva).length === 0){
-            throw boom.badRequest('No hay campos para actualizar');
-        }
-
-        const rta = await models.Reserva.update(updateReserva, {where: {id: id}});
-        if(!rta){
-            throw boom.notFound('Reserva no encontrada')
-        }
-        res.status(204);
+        res.status(201).json({
+            message: 'Reserva actualizada',
+        });
     }
     catch(err){
         next(err);

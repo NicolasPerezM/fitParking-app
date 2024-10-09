@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const idReserva = Joi.number().integer().min(1);
+const id = Joi.number().integer().min(1);
 const idUsuario = Joi.number().integer().min(1);
 const idVehiculo = Joi.number().integer().min(1);
 const idEspacioParqueo = Joi.number().integer().min(1);
@@ -9,23 +9,23 @@ const fechaFin = Joi.date();
 const estadoReserva = Joi.string();
 
 export const createReservaSchema = Joi.object({
-    idUsuario: idUsuario.required(),
+    /*idUsuario: idUsuario.required(),
     idVehiculo: idVehiculo.required(),
-    idEspacioParqueo: idEspacioParqueo.required(),
+    idEspacioParqueo: idEspacioParqueo.required(),*/
     fechaInicio: fechaInicio.required(),
     fechaFin: fechaFin.required(),
     estadoReserva: estadoReserva.required()
 });
 
 export const updateReservaSchema = Joi.object({
-    idUsuario: idUsuario,
+    /*idUsuario: idUsuario,
     idVehiculo: idVehiculo,
-    idEspacioParqueo: idEspacioParqueo,
+    idEspacioParqueo: idEspacioParqueo,*/
     fechaInicio: fechaInicio,
     fechaFin: fechaFin,
     estadoReserva: estadoReserva
 });
 
 export const getReservaSchema = Joi.object({
-    idReserva: idReserva.required(),
+    idReserva: id.required(),
 });
