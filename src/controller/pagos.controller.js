@@ -21,8 +21,8 @@ const getPagos = async(req, res, next) => {
 
 const getPagosbyId = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Pagos.findOne({where: {id: id}});
+        const { idPago } = req.params;
+        const rta = await models.Pagos.findByPk(idPago);
         if(!rta){
             throw boom.notFound('Pago no encontrado');
         }
@@ -55,8 +55,8 @@ const createPagos = async(req, res, next) => {
 
 const deletePagos = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Pagos.destroy({where: {id: id}});
+        const { idPago } = req.params;
+        const rta = await models.Pagos.destroy({where: {idPago: idPago}});
         if(!rta){
             throw boom.notFound('Pago no encontrado');
         }
@@ -71,24 +71,18 @@ const deletePagos = async(req, res, next) => {
 
 const updatePagos = async(req, res, next) => {
     try{
-        const { id } = req.params;
+        const { idPago } = req.params;
         const { monto, estado } = req.body;
-
-
-        const updateReserva = { 
-            ...(monto && {monto}), 
-            ...(estado && {estado})
-         };
-
-         if(Object.keys(updateReserva).length === 0){
-            throw boom.badRequest('No hay campos para actualizar');
-        }
-
-        const rta = await models.Pagos.update(data, {where: {id: id}});
-        if(!rta){
+        const data = {monto, estado};
+        const updatedPagos = await models.Pagos.update(data, {
+            where: {idPago: idPago}
+        });
+        if(!updatedPagos){
             throw boom.notFound('Pago no actualizado');
         }
-        res.status(201).json(rta);
+        res.status(201).json({
+            message: 'Pago actualizado',
+        });
     }
     catch(err){
         next(err);
