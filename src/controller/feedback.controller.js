@@ -2,7 +2,7 @@ import boom from '@hapi/boom';
 import { models } from '../../libs/sequelize.js';
 
 //read all
-const getFeedback = async(req, res, next) => {
+const getFeedbacks = async(req, res, next) => {
     try{
         const rta = await models.Feedback.findAll();
         if(rta.length === 0){
@@ -19,8 +19,8 @@ const getFeedback = async(req, res, next) => {
 
 const getFeedbackById = async(req, res, next) =>{
     try{
-        const { id } = req.params;
-        const rta = await models.Feedback.findOne({where: {id: id}});
+        const { idFeedback } = req.params;
+        const rta = await models.Feedback.findByPk(idFeedback);
         if(!rta){
             throw boom.notFound('Feedback no encontrado');
         }
@@ -52,8 +52,10 @@ const createFeedback = async(req, res, next) =>{
 
 const deleteFeedback = async(req, res, next) =>{
     try{
-        const { id } = req.params;
-        const rta = await models.Feedback.destroy({where: {id: id}});
+        const { idFeedback } = req.params;
+        const rta = await models.Feedback.destroy({
+            where: {idFeedback: idFeedback}
+        });
         if(!rta){
             throw boom.notFound('Feedback no encontrado');
         }
@@ -64,4 +66,9 @@ const deleteFeedback = async(req, res, next) =>{
     }
 }
 
-export {getFeedback, getFeedbackById, createFeedback, deleteFeedback}
+export const methodsFeedback = {
+    getFeedbacks, 
+    getFeedbackById, 
+    createFeedback, 
+    deleteFeedback
+}

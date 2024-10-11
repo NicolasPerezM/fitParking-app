@@ -29,9 +29,10 @@ const feedbackSchema = {
         field: 'fecha_creacion',
         allowNull: false,
         type: DataTypes.DATE,
-        default: Sequelize.Now
+        defaultValue: Sequelize.NOW
     }
 }
+
 
 class Feedback extends Model {
     static associate(models) {

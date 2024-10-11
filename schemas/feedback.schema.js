@@ -6,9 +6,9 @@ const comentario = Joi.string();
 const fechaCreacion = Joi.date();
 
 export const createFeedbackSchema = Joi.object({
-    idUsuario: idUsuario.required(),
+    //idUsuario: idUsuario.required(),
     comentario: comentario.required(),
-    fechaCreacion: fechaCreacion.required()
+    fechaCreacion: fechaCreacion
 });
 
 export const getFeedbackSchema = Joi.object({
