@@ -18,8 +18,10 @@ export const getEspaciosParqueo = async(req, res, next) => {
 //read by Id 
 export const getEspacioParqueoById = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.EspacioParqueo.findOne({where: {id: id}});
+        const { idEspacioParqueo } = req.params;
+        const rta = await models.EspacioParqueo.findOne({
+            where: {idEspacioParqueo: idEspacioParqueo}
+        });
         if(!rta){
             throw boom.notFound('Espacio no encontrado');
         }
@@ -51,22 +53,17 @@ const createEspacioParqueo = async(req, res, next) => {
 
 const updateEspacioParqueo = async(req, res, next) => {
     try{
-        const { id } = req.params;
+        const { idEspacioParqueo } = req.params;
         const { estado } = req.body;
-
-        const updateEspacioParqueo = {
-            ...(estado && {estado})
-        }
-
-        if(Object.keys(updateEspacioParqueo).length === 0){
-            throw boom.badRequest('No hay campos para actualizar');
-        }
-
-        const rta = await models.EspacioParqueo.update(updateEspacioParqueo, {where: {id: id}});
-        if(!rta){
+        const data = {estado};
+        const updatedEspacioParqueo = await models.EspacioParqueo.update(data, {
+            where: {idEspacioParqueo: idEspacioParqueo}});
+        if(!updatedEspacioParqueo){
             throw boom.badRequest('Espacio no actualizado');
         }
-        res.sendStatus(204);
+        res.sendStatus(204).json({
+            message: 'Espacio actualizado',
+        });
     }
     catch(err){
         next(err);
@@ -75,10 +72,12 @@ const updateEspacioParqueo = async(req, res, next) => {
 
 //delete
 
-const deleteHistorialParqueo = async(req, res, next) => {
+const deleteEspacioParqueo = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.EspacioParqueo.destroy({where: {id: id}});
+        const { idEspacioParqueo } = req.params;
+        const rta = await models.EspacioParqueo.destroy({
+            where: {idEspacioParqueo: idEspacioParqueo}
+        });
         if(!rta){
             throw boom.notFound('Espacio no encontrado');
         }
@@ -94,5 +93,5 @@ export const methodsEspacioParqueo = {
     getEspacioParqueoById,
     createEspacioParqueo,
     updateEspacioParqueo,
-    deleteHistorialParqueo
+    deleteEspacioParqueo
 }

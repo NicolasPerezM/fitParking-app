@@ -5,7 +5,7 @@ const idLote = Joi.number().integer().min(1);
 const estado = Joi.string();
 
 export const createEspacioParqueoSchema = Joi.object({
-    idLote: idLote.required(),
+    //idLote: idLote.required(),
     estado: estado.required()
 })
 
