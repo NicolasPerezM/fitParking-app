@@ -7,9 +7,9 @@ const fechaDeEnvio = Joi.date();
 const tipoNotificacion = Joi.string();
 
 export const createNotificacionSchema = Joi.object({
-    idUsuario: idUsuario.required(),
+    //idUsuario: idUsuario.required(),
     mensaje: mensaje.required(),
-    fechaDeEnvio: fechaDeEnvio.required(),
+    fechaDeEnvio: fechaDeEnvio,
     tipoNotificacion: tipoNotificacion.required()
 });
 

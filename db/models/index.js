@@ -7,6 +7,7 @@ import { HistorialParqueo, historialParqueoSchema } from './historialParqueo.mod
 import { Incidencias, incidenciasSchema } from './incidencias.model.js';
 import { Feedback, feedbackSchema } from './feedback.model.js';
 import { Pagos, pagosSchema } from './pagos.model.js';
+import { Notificacion, notificacionSchema } from './notificacion.model.js';
 
 function setUpModels(sequelize){
     Usuario.init(userSchema, Usuario.config(sequelize));
@@ -18,6 +19,7 @@ function setUpModels(sequelize){
     Incidencias.init(incidenciasSchema, Incidencias.config(sequelize));
     Feedback.init(feedbackSchema, Feedback.config(sequelize));
     Pagos.init(pagosSchema, Pagos.config(sequelize));
+    Notificacion.init(notificacionSchema, Notificacion.config(sequelize));
 
     Vehiculos.associate(sequelize.models);
     Usuario.associate(sequelize.models);

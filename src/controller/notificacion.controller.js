@@ -3,7 +3,7 @@ import { models } from '../../libs/sequelize.js';
 
 //read all
 
-const getNotificacion = async(req, res, next) => {
+const getNotificaciones = async(req, res, next) => {
     try{
         const rta = await models.Notificacion.findAll();
         if(rta.length === 0){
@@ -20,8 +20,8 @@ const getNotificacion = async(req, res, next) => {
 
 const getNotificationById = async(req, res, next) => {
     try {
-        const { id } = req.params;
-        const rta = await models.Notificacion.findOne({where: {id: id}});
+        const { idNotificacion } = req.params;
+        const rta = await models.Notificacion.findByPk(idNotificacion);
         if(!rta){
             throw boom.notFound('Notificacion no encontrada');
         }
@@ -54,8 +54,8 @@ const createNotificacion = async(req, res, next) => {
 
 const deleteNotificacion = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Notificacion.destroy({where: {id: id}});
+        const { idNotificacion } = req.params;
+        const rta = await models.Notificacion.destroy({where: {idNotificacion: idNotificacion}});
         if(!rta){
             throw boom.badRequest('Notificacion no eliminada');
         }
@@ -68,7 +68,7 @@ const deleteNotificacion = async(req, res, next) => {
 }
 
 export const methodsNotificacion = {
-    getNotificacion,
+    getNotificaciones,
     getNotificationById,
     createNotificacion,
     deleteNotificacion
