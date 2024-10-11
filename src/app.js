@@ -7,6 +7,7 @@ import vehiculosRoutes from './routes/vehiculos.route.js';
 import reservasRoutes from './routes/reserva.route.js';
 import pagosRoutes from './routes/pagos.route.js';
 import notificacionRoutes from './routes/notificacion.route.js';
+import loteRoutes from './routes/lote.route.js';
 import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
 
@@ -54,6 +55,7 @@ app.use('/api/v1/vehiculos', vehiculosRoutes);
 app.use('/api/v1/reservas', reservasRoutes);
 app.use('/api/v1/pagos', pagosRoutes);
 app.use('/api/v1/notificaciones', notificacionRoutes);
+app.use('/api/v1/lotes', loteRoutes);
 
 //middlewares-err
 

@@ -19,8 +19,8 @@ export const getLotes = async(req, res, next) => {
 
 const getLote = async(req, res, next) => {
     try {
-        const { id } = req.params;
-        const rta = await models.Lote.findOne({where: {id: id}});
+        const { idLote } = req.params;
+        const rta = await models.Lote.findByPk(idLote);
         if(!rta){
             throw boom.notFound('Lote no encontrado');
         }
@@ -40,7 +40,7 @@ const createLote = async(req, res, next) => {
         if(!newLote){
             throw boom.badRequest('Lote no creado');
         }
-        res.status(201).json(rta);
+        res.status(201).json(newLote);
     }
     catch(err){
         next(err);
@@ -50,8 +50,8 @@ const createLote = async(req, res, next) => {
 
 const deleteLote = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Lote.destroy({where: {id: id}});
+        const { idLote } = req.params;
+        const rta = await models.Lote.destroy({where: {idLote: idLote}});
         if(!rta){
             throw boom.notFound('Lote no eliminado');
         }
@@ -67,24 +67,18 @@ const deleteLote = async(req, res, next) => {
 
 const updateLote = async(req, res, next) => {
     try{
-        const { id } = req.params;
+        const { idLote } = req.params;
         const { nombreLote, ubicacion, capacidad} = req.body;
-
-        const updateLote = {
-            ...(nombreLote && {nombreLote}),
-            ...(ubicacion && {ubicacion}),
-            ...(capacidad && {capacidad})
-        };
-
-        if(Object.keys(updateLote).length === 0){
-            throw boom.badRequest('No hay campos para actualizar');
-        }
-
-        const rta = await models.Lote.update(updateLote, {where: {id: id}});
-        if(!rta){
+        const data = {nombreLote, ubicacion, capacidad}
+        const updatedLote = await models.Lote.update(data, {
+            where: {idLote: idLote}
+        });
+        if(!updatedLote){
             throw boom.notFound('Lote no actualizado');
         }
-        res.status(201).json(rta);
+        res.status(201).json({
+            message: 'Lote actualizado',
+        });
     }
     catch(err){
         next(err);
@@ -95,6 +89,7 @@ const updateLote = async(req, res, next) => {
 
 export const methodsLote = {
     getLotes,
+    createLote,
     getLote,
     deleteLote,
     updateLote
