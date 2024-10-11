@@ -20,8 +20,8 @@ const getHistorialParqueo = async(req, res, next) => {
 
 const getHistorialParqueoById = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.HistorialParqueo.findOne({where: {id: id}});
+        const { idHistorialParqueo } = req.params;
+        const rta = await models.HistorialParqueo.findByPk(idHistorialParqueo);
         if(!rta){
             throw boom.notFound('Historial de parqueo no encontrado');
         }
@@ -36,8 +36,8 @@ const getHistorialParqueoById = async(req, res, next) => {
 
 const createHistorialParqueo = async(req, res, next) => {
     try{
-        const { idVehiculo, idLote, fechaEntrada, fechaSalida } = req.body;
-        const data = { idVehiculo, idLote, fechaEntrada, fechaSalida };
+        const { tipoIngreso } = req.body;
+        const data = { tipoIngreso };
         const newHistorialParqueo = await models.HistorialParqueo.create(data);
         if(!newHistorialParqueo){
             throw boom.badRequest('Historial de parqueo no creado');
@@ -53,8 +53,10 @@ const createHistorialParqueo = async(req, res, next) => {
 
 const deleteHistorialParqueo = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.HistorialParqueo.destroy({where: {id: id}});
+        const { idHistorialParqueo } = req.params;
+        const rta = await models.HistorialParqueo.destroy({
+            where: { idHistorialParqueo: idHistorialParqueo }
+        });
         if(!rta){
             throw boom.notFound('Historial de parqueo no encontrado');
         }

@@ -8,7 +8,7 @@ const HISTORIAL_PARQUEO_TABLE = 'historial_parqueo';
 
 const historialParqueoSchema = {
 
-    idHistorial: {
+    idHistorialParqueo: {
         field: 'id_historial',
         allowNull: false,
         autoIncrement: true,
@@ -47,7 +47,8 @@ const historialParqueoSchema = {
     },
     fechaEntrada: {
         allowNull: false,
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        defaultValue: Sequelize.NOW
     },
     fechaSalida: {
         allowNull: true,

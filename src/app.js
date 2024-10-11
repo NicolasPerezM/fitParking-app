@@ -9,6 +9,7 @@ import pagosRoutes from './routes/pagos.route.js';
 import notificacionRoutes from './routes/notificacion.route.js';
 import loteRoutes from './routes/lote.route.js';
 import inidenciaRoutes from './routes/incidencias.route.js';
+import historialParqueoRoutes from './routes/historialParqueo.route.js'
 import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
 
@@ -58,6 +59,7 @@ app.use('/api/v1/pagos', pagosRoutes);
 app.use('/api/v1/notificaciones', notificacionRoutes);
 app.use('/api/v1/lotes', loteRoutes);
 app.use('/api/v1/incidencias', inidenciaRoutes);
+app.use('/api/v1/historialParqueo', historialParqueoRoutes);
 //middlewares-err
 
 app.use(logErrors);
