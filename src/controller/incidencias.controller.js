@@ -19,8 +19,8 @@ export const getIncidencias = async(req, res, next) => {
 
 const getIncidencia = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Incidencias.findOne({where: {id: id}});
+        const { idIncidencia } = req.params;
+        const rta = await models.Incidencias.findByPk(idIncidencia);
         if(!rta){
             throw boom.notFound('Incidencia no encontrada');
         }
@@ -41,7 +41,7 @@ const createIncidencia = async(req, res, next) => {
         if(!newIncidencia){
             throw boom.badRequest('Incidencia no creada');
         }
-        res.status(201).json(rta);
+        res.status(201).json(newIncidencia);
     }
     catch(err){
         next(err);
@@ -52,8 +52,8 @@ const createIncidencia = async(req, res, next) => {
 
 const deleteIncidencia = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Incidencias.destroy({where: {id: id}});
+        const { idIncidencia } = req.params;
+        const rta = await models.Incidencias.destroy({where: {idIncidencia: idIncidencia}});
         if(!rta){
             throw boom.notFound('Incidencia no eliminada');
         }
@@ -68,27 +68,24 @@ const deleteIncidencia = async(req, res, next) => {
 
 const updateIncidencia = async(req, res, next) => {
     try{
-        const { id } = req.params;
+        const { idIncidencia } = req.params;
         const { tipoReporte, descripcion } = req.body;
-        const updateIncidencia = {
-            ...(tipoReporte && {tipoReporte}),
-            ...(descripcion && {descripcion})
-        }
-        if(Object.keys(updateIncidencia).length === 0){
-            throw boom.badRequest('No hay campos para actualizar');
-        }
-        const rta = await models.Incidencias.update(updateIncidencia, {where: {id: id}});
-        if(!rta){
+        const data = {tipoReporte, descripcion};
+        const updatedIncidencia = await models.Incidencias.update(data, {
+            where: {idIncidencia: idIncidencia}
+        });
+        if(!updatedIncidencia){
             throw boom.notFound('Incidencia no actualizada');
         }
-        res.status(201).json(rta);
+        res.status(201).json({
+            message: 'Incidencia actualizada',});
     }
     catch(err){
         next(err);
     }
 }
 
-export const methodsIncidencia = {
+export const methodsIncidencias = {
     getIncidencia,
     getIncidencias,
     createIncidencia,

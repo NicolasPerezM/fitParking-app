@@ -31,7 +31,7 @@ const incidenciasSchema = {
         field: 'fecha_de_generacion',
         allowNull: false,
         type: DataTypes.DATE,
-        default: Sequelize.NOW
+        defaultValue: Sequelize.NOW
     },
     descripcion: {
         allowNull: false,
