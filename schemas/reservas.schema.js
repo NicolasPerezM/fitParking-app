@@ -9,8 +9,8 @@ const fechaFin = Joi.date();
 const estadoReserva = Joi.string();
 
 export const createReservaSchema = Joi.object({
-    /*idUsuario: idUsuario.required(),
-    idVehiculo: idVehiculo.required(),
+    idUsuario: idUsuario.required(),
+    /*idVehiculo: idVehiculo.required(),
     idEspacioParqueo: idEspacioParqueo.required(),*/
     fechaInicio: fechaInicio.required(),
     fechaFin: fechaFin.required(),
@@ -18,9 +18,9 @@ export const createReservaSchema = Joi.object({
 });
 
 export const updateReservaSchema = Joi.object({
-    /*idUsuario: idUsuario,
+    idUsuario: idUsuario,
     idVehiculo: idVehiculo,
-    idEspacioParqueo: idEspacioParqueo,*/
+    idEspacioParqueo: idEspacioParqueo,
     fechaInicio: fechaInicio,
     fechaFin: fechaFin,
     estadoReserva: estadoReserva

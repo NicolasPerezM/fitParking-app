@@ -23,6 +23,7 @@ function setUpModels(sequelize){
 
     Vehiculos.associate(sequelize.models);
     Usuario.associate(sequelize.models);
+    Reserva.associate(sequelize.models);
     HistorialParqueo.associate(sequelize.models);
 }
 

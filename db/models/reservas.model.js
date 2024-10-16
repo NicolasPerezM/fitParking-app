@@ -16,12 +16,13 @@ const reservaSchema = {
     idUsuario: {
         field: 'id_usuario',
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: USUARIO_TABLE,
             key: 'id_usuario'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     idVehiculo: {
         field: 'id_vehiculo',
@@ -65,9 +66,11 @@ const reservaSchema = {
 
 class Reserva extends Model {
     static associate(models) {
-
+        this.belongsTo(models.Usuario, {
+            as: 'Usuario',
+            foreignKey: 'idUsuario'
+        })
     }
-
     static config(sequelize) {
         return {
             sequelize,

@@ -5,7 +5,9 @@ import { models } from '../../libs/sequelize.js';
 
 const getReservas = async(req, res, next) => {
     try{
-        const rta = await models.Reserva.findAll();
+        const rta = await models.Reserva.findAll({
+            include: ['Usuario']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay reservas');
         }
@@ -21,7 +23,9 @@ const getReservas = async(req, res, next) => {
 const getReservaById = async(req, res, next) => {
     try{
         const { idReserva } = req.params;
-        const rta = await models.Reserva.findByPk(idReserva);
+        const rta = await models.Reserva.findByPk(idReserva, {
+            include: ['Usuario']
+        });
         if(!rta) {
             throw boom.notFound('Reserva no encontrada');
         }
@@ -36,8 +40,8 @@ const getReservaById = async(req, res, next) => {
 
 const createReserva = async(req, res, next) => {
     try{
-        const {fechaInicio, fechaFin, estadoReserva} = req.body;
-        const data = {fechaInicio, fechaFin, estadoReserva};
+        const {fechaInicio, fechaFin, estadoReserva, idUsuario} = req.body;
+        const data = {fechaInicio, fechaFin, estadoReserva, idUsuario};
         const newReserva = await models.Reserva.create(data);
         if(!newReserva) {
             throw boom.badRequest('Reserva no creada')
