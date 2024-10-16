@@ -58,9 +58,12 @@ class Usuario extends Model {
         this.hasMany(models.Reserva, {
             as: 'reservas',
             foreignKey: 'idUsuario'
-        })
+        });
+        this.hasMany(models.Pagos, {
+            as: 'usuario',
+            foreignKey: 'idUsuario'
+        });
     }
-
     static config(sequelize) {
         return {
             sequelize,

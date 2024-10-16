@@ -25,6 +25,7 @@ function setUpModels(sequelize){
     Usuario.associate(sequelize.models);
     Reserva.associate(sequelize.models);
     HistorialParqueo.associate(sequelize.models);
+    Pagos.associate(sequelize.models);
 }
 
 export default setUpModels;

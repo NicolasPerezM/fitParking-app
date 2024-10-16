@@ -1,14 +1,14 @@
 import Joi from "joi";
 
 const id = Joi.number().integer().min(1);
-const idUsuarios = Joi.number().integer().min(1);
+const idUsuario = Joi.number().integer().min(1);
 const idHistorial = Joi.number().integer().min(1);
 const monto = Joi.number().integer().min(1);
 const fechaCreacion = Joi.date();
 const estado = Joi.string();
 
 export const createPagoSchema = Joi.object({
-    //idUsuarios: idUsuarios.required(),
+    idUsuario: idUsuario.required(),
     //idHistorial: idHistorial.required(),
     monto: monto.required(),
     //fechaCreacion: fechaCreacion.required(),
@@ -16,7 +16,7 @@ export const createPagoSchema = Joi.object({
 });
 
 export const updatePagoSchema = Joi.object({
-    idUsuarios: idUsuarios,
+    idUsuario: idUsuario,
     idHistorial: idHistorial,
     monto: monto,
     fechaCreacion: fechaCreacion,

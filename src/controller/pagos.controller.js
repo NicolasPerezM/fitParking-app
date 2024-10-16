@@ -6,7 +6,9 @@ import { models } from '../../libs/sequelize.js';
 
 const getPagos = async(req, res, next) => {
     try{
-        const rta = await models.Pagos.findAll();
+        const rta = await models.Pagos.findAll({
+            include: ['Usuario']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay pagos');
         }
@@ -22,7 +24,9 @@ const getPagos = async(req, res, next) => {
 const getPagosbyId = async(req, res, next) => {
     try{
         const { idPago } = req.params;
-        const rta = await models.Pagos.findByPk(idPago);
+        const rta = await models.Pagos.findByPk(idPago, {
+            include: ['Usuario']}  
+        );
         if(!rta){
             throw boom.notFound('Pago no encontrado');
         }
@@ -38,8 +42,8 @@ const getPagosbyId = async(req, res, next) => {
 const createPagos = async(req, res, next) => {
 
     try{
-        const {monto, estado} = req.body;
-        const data = {monto, estado};
+        const {monto, estado, idUsuario} = req.body;
+        const data = {monto, estado, idUsuario};
         const newPagos = await models.Pagos.create(data);
         if(!newPagos){
             throw boom.badRequest('Pago no creado'); 

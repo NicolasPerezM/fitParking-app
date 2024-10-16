@@ -12,16 +12,17 @@ const pagosSchema = {
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    idUsuarios: {
-        field: 'id_usuarios',
+    idUsuario: {
+        field: 'id_usuario',
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: USUARIO_TABLE,
             key: 'id_usuario'
         },
         unique: true,
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     idHistorial: {
         field: 'id_historial',
@@ -52,8 +53,11 @@ const pagosSchema = {
 
 class Pagos extends Model {
     static associate(models) {
-        this.belongsTo(models.Usuario, { as: 'Usuarios' });
-        this.belongsTo(models.HistorialParqueo, { as: 'HistorialParqueo' });
+        this.belongsTo(models.Usuario, { 
+            as: 'Usuario',
+            foreignKey: 'idUsuario'
+         });
+        //this.belongsTo(models.HistorialParqueo, { as: 'HistorialParqueo' });
     }
 
     static config(sequelize){
