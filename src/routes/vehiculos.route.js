@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', 
     vehiculosController.getVehicles);
 
-router.get('/:id', 
+router.get('/:idVehiculo', 
     validatorHandler(getVehicleSchema, 'params'), 
     vehiculosController.getVehicleById);
 
@@ -16,10 +16,10 @@ router.post('/crearVehiculo',
     validatorHandler(createVehicleSchema, 'body'),
     vehiculosController.createVehicle);
 
-router.delete('/:id',
+router.delete('/:idVehiculo',
     vehiculosController.deleteVehicle);
 
-router.patch('/:id', 
+router.patch('/:idVehiculo', 
     validatorHandler(getVehicleSchema, 'params'),
     validatorHandler(updateVehicleSchema, 'body'),
     vehiculosController.updateVehicle);

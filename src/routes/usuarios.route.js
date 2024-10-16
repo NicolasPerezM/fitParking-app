@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', 
     usuariosController.getUsers);
 
-router.get('/:id', 
+router.get('/:idUsuario', 
     validatorHandler(getUserSchema, 'params'), 
     usuariosController.getUserById);
 
@@ -16,10 +16,10 @@ router.post('/crearUsuario',
     validatorHandler(createUserSchema, 'body'), 
     usuariosController.createUser);
 
-router.delete('/delete/:id', 
+router.delete('/delete/:idUsuario', 
     usuariosController.deleteUser);
     
-router.patch('/update/:id', 
+router.patch('/update/:idUsuario', 
     validatorHandler(getUserSchema, 'params'), 
     validatorHandler(updateUserSchema, 'body'), 
     usuariosController.updateUser);

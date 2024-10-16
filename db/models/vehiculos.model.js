@@ -13,13 +13,14 @@ const vehiculosSchema = {
     },
     idUsuario: {
         field: 'id_usuario',
+        allowNull: false,
         type: DataTypes.INTEGER,
         references: {
             model: USUARIO_TABLE,
             key: 'id_usuario'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     }, 
     marca: {
         allowNull: false,
@@ -48,6 +49,11 @@ class Vehiculos extends Model {
     static associate(models) {
         //relacion 1-1
         //this.belongsTo(models.Reserva, {as: 'reserva', foreignKey: 'id'});
+        //relacion 1-muchos
+        this.belongsTo(models.Usuario, { 
+            as: 'Usuario',
+            foreignKey: 'idUsuario' 
+        });
     }
     static config(sequelize) {
         return {

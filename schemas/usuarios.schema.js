@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const idUsuarios = Joi.number().integer().min(1);
+const idUsuario = Joi.number().integer().min(1);
 const Nombres = Joi.string().min(3).max(100);
 const Apellidos = Joi.string().min(3).max(100);
 const CorreoElectronico = Joi.string().email();
@@ -27,5 +27,5 @@ export const updateUserSchema = Joi.object({
 });
 
 export const getUserSchema = Joi.object({
-    id: idUsuarios.required(),
+    idUsuario: idUsuario.required(),
 });

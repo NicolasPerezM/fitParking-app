@@ -18,3 +18,4 @@ export const getEspacioParqueoSchema = Joi.object({
     idEspacioParqueo: idEspacioParqueo.required(),
 })
 
+

@@ -22,8 +22,10 @@ export const getUsers = async (req, res, next) => {
 //read by ID
 export const getUserById = async (req, res, next) => {
     try{
-        const { id } = req.params; 
-        const rta = await models.Usuario.findOne({where: {id: id}});
+        const { idUsuario } = req.params; 
+        const rta = await models.Usuario.findByPk(idUsuario, { 
+            include: ['vehiculos'] 
+        });
         if (!rta) {
            throw boom.notFound('Ususario no encontrado');
         }
@@ -54,8 +56,8 @@ export const createUser = async (req, res, next) => {
 
 export const deleteUser = async (req, res, next) => {
     try{
-        const {id} = req.params;
-        const rta = await models.Usuario.destroy({where: {id: id}});
+        const {idUsuario} = req.params;
+        const rta = await models.Usuario.destroy({where: {idUsuarios: idUsuario}});
         if(!rta) {
             throw boom.notFound('Usuario no encontrado');
         }

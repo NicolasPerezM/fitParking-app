@@ -51,7 +51,10 @@ const userSchema ={
 
 class Usuario extends Model {
     static associate(models) {
-        // associations can be defined here
+        this.hasMany(models.Vehiculos, {
+            as: 'vehiculos',
+            foreignKey: 'idUsuario'
+        });
     }
 
     static config(sequelize) {

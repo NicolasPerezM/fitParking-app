@@ -6,7 +6,9 @@ import { models } from '../../libs/sequelize.js';
 
 const getVehicles = async(req, res, next) => {
     try {
-        const rta = await models.Vehiculos.findAll();
+        const rta = await models.Vehiculos.findAll({
+            include: ['Usuario']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay vehiculos');
         }
@@ -22,8 +24,10 @@ const getVehicles = async(req, res, next) => {
 //read by id
 const getVehicleById = async(req, res, next) => {
     try{
-        const { id } = req.params;
-        const rta = await models.Vehiculos.findOne({where: {id: id}});
+        const { idVehiculo } = req.params;
+        const rta = await models.Vehiculos.findByPk(idVehiculo, {
+            include: ['Usuario']
+        });
         if(!rta){
             throw boom.notFound('Vehiculo no encontrado');
         }
@@ -37,8 +41,8 @@ const getVehicleById = async(req, res, next) => {
 //create
 const createVehicle = async(req, res, next) => {
     try {
-        const { marca, modelo, color, placa, tipoVehiculo } = req.body;
-        const data = { marca, modelo, color, placa, tipoVehiculo };
+        const { marca, modelo, color, placa, tipoVehiculo, idUsuario } = req.body;
+        const data = { marca, modelo, color, placa, tipoVehiculo, idUsuario };
         const newVehicle = await models.Vehiculos.create(data);
         if(!newVehicle){
             throw boom.badRequest('Vehiculo no creado');
@@ -69,10 +73,12 @@ const deleteVehicle = async(req, res, next) => {
 //update
 const updateVehicle = async(req, res, next) => {
     try{
-        const { id } = req.params;
+        const { idVehiculo } = req.params;
         const { marca, modelo, color, placa, tipoVehiculo } = req.body;
         const data = { marca, modelo, color, placa, tipoVehiculo };
-        const updateVehicle = await models.Vehiculos.update(data, {where: {id: id}});
+        const updateVehicle = await models.Vehiculos.update(data, {where: {
+            idVehiculo: idVehiculo}
+        });
         if(!updateVehicle){
             throw boom.badRequest('Vehiculo no actualizado');
         }
