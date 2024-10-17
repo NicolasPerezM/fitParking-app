@@ -60,7 +60,11 @@ class Usuario extends Model {
             foreignKey: 'idUsuario'
         });
         this.hasMany(models.Pagos, {
-            as: 'usuario',
+            as: 'pagos',
+            foreignKey: 'idUsuario'
+        });
+        this.hasMany(models.Notificacion, {
+            as: 'notificacion', 
             foreignKey: 'idUsuario'
         });
     }

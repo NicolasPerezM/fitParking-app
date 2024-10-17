@@ -5,7 +5,9 @@ import { models } from '../../libs/sequelize.js';
 
 const getNotificaciones = async(req, res, next) => {
     try{
-        const rta = await models.Notificacion.findAll();
+        const rta = await models.Notificacion.findAll({
+            include: ['Usuario']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay notificaciones');
         }
@@ -21,7 +23,9 @@ const getNotificaciones = async(req, res, next) => {
 const getNotificationById = async(req, res, next) => {
     try {
         const { idNotificacion } = req.params;
-        const rta = await models.Notificacion.findByPk(idNotificacion);
+        const rta = await models.Notificacion.findByPk(idNotificacion, {
+            include: ['Usuario']
+        });
         if(!rta){
             throw boom.notFound('Notificacion no encontrada');
         }
@@ -37,8 +41,8 @@ const getNotificationById = async(req, res, next) => {
 
 const createNotificacion = async(req, res, next) => {
     try{
-        const {mensaje, tipoNotificacion} = req.body;
-        const data = {mensaje, tipoNotificacion};
+        const {mensaje, tipoNotificacion, idUsuario} = req.body;
+        const data = {mensaje, tipoNotificacion, idUsuario};
         const newNotificacion = await models.Notificacion.create(data);
         if(!newNotificacion){ 
             throw boom.badRequest('Notificacion no creada');
