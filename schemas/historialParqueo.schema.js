@@ -9,8 +9,8 @@ const fechaSalida = Joi.date();
 const tipoIngreso = Joi.string();
 
 export const createHistorialParqueoSchema = Joi.object({
-    /*idUsuario: idUsuario.required(),
-    idVehiculo: idVehiculo.required(),
+    idUsuario: idUsuario.required(),
+    /*idVehiculo: idVehiculo.required(),
     idEspacioParqueo: idEspacioParqueo.required(),*/
     fechaEntrada: fechaEntrada,
     fechaSalida: fechaSalida,

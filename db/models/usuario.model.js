@@ -67,6 +67,14 @@ class Usuario extends Model {
             as: 'notificacion', 
             foreignKey: 'idUsuario'
         });
+        this.hasMany(models.Feedback, {
+            as: 'feedback',
+            foreignKey: 'idUsuario'
+        });
+        this.hasMany(models.HistorialParqueo, {
+            as: 'historialParqueo',
+            foreignKey: 'idUsuario'
+        });
     }
     static config(sequelize) {
         return {

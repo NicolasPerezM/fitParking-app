@@ -27,6 +27,7 @@ function setUpModels(sequelize){
     HistorialParqueo.associate(sequelize.models);
     Pagos.associate(sequelize.models);
     Notificacion.associate(sequelize.models);
+    Feedback.associate(sequelize.models);
 }
 
 export default setUpModels;

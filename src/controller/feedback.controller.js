@@ -4,7 +4,9 @@ import { models } from '../../libs/sequelize.js';
 //read all
 const getFeedbacks = async(req, res, next) => {
     try{
-        const rta = await models.Feedback.findAll();
+        const rta = await models.Feedback.findAll({
+            include: ['Usuario']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay feedback.');
         }
@@ -20,7 +22,9 @@ const getFeedbacks = async(req, res, next) => {
 const getFeedbackById = async(req, res, next) =>{
     try{
         const { idFeedback } = req.params;
-        const rta = await models.Feedback.findByPk(idFeedback);
+        const rta = await models.Feedback.findByPk(idFeedback, {
+            include: ['Usuario']
+        });
         if(!rta){
             throw boom.notFound('Feedback no encontrado');
         }
@@ -35,8 +39,8 @@ const getFeedbackById = async(req, res, next) =>{
 
 const createFeedback = async(req, res, next) =>{
     try{
-        const { comentario } = req.body;
-        const data = {comentario};
+        const { comentario, idUsuario } = req.body;
+        const data = {comentario, idUsuario};
         const newFeedback = await models.Feedback.create(data);
         if(!newFeedback){
             throw boom.badRequest('Feedback no creado');
