@@ -31,6 +31,10 @@ const espacioParqueoSchema = {
 
 class EspacioParqueo extends Model {
     static associate(models) {
+        this.hasMany(models.Reserva, {
+            as: 'reservas',
+            foreignKey: 'idEspacioParqueo'
+        })
         
     }
 

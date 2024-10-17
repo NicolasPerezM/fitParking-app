@@ -28,6 +28,7 @@ function setUpModels(sequelize){
     Pagos.associate(sequelize.models);
     Notificacion.associate(sequelize.models);
     Feedback.associate(sequelize.models);
+    EspacioParqueo.associate(sequelize.models);
 }
 
 export default setUpModels;
