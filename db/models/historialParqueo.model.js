@@ -71,7 +71,11 @@ class HistorialParqueo extends Model {
         this.belongsTo(models.Usuario, {
            as: 'Usuario',
            foreignKey: 'idUsuario'
-       })
+       });
+       this.belongsTo(models.Vehiculos, {
+           as: 'vehiculo',
+           foreignKey: 'idVehiculo'
+       });
     }
 
     static config(sequelize){
