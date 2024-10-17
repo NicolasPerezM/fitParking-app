@@ -54,6 +54,10 @@ class Vehiculos extends Model {
             as: 'Usuario',
             foreignKey: 'idUsuario' 
         });
+        this.hasMany(models.Reserva, {
+            as: 'reservas',
+            foreignKey: 'idVehiculo'
+        })
     }
     static config(sequelize) {
         return {

@@ -27,12 +27,13 @@ const reservaSchema = {
     idVehiculo: {
         field: 'id_vehiculo',
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: VEHICULOS_TABLE,
             key: 'id_vehiculo'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     idEspacioParqueo: {
         field: 'id_espacio_parqueo',
@@ -69,6 +70,10 @@ class Reserva extends Model {
         this.belongsTo(models.Usuario, {
             as: 'Usuario',
             foreignKey: 'idUsuario'
+        });
+        this.belongsTo(models.Vehiculos, {
+            as: 'Vehiculo',
+            foreignKey: 'idVehiculo'
         })
     }
     static config(sequelize) {

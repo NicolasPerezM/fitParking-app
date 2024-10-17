@@ -10,8 +10,8 @@ const estadoReserva = Joi.string();
 
 export const createReservaSchema = Joi.object({
     idUsuario: idUsuario.required(),
-    /*idVehiculo: idVehiculo.required(),
-    idEspacioParqueo: idEspacioParqueo.required(),*/
+    idVehiculo: idVehiculo.required(),
+    //idEspacioParqueo: idEspacioParqueo.required(),
     fechaInicio: fechaInicio.required(),
     fechaFin: fechaFin.required(),
     estadoReserva: estadoReserva.required()
