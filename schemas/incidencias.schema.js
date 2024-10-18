@@ -7,7 +7,7 @@ const fechaGeneracion = Joi.date();
 const descripcion = Joi.string();
 
 export const createIncidenciaSchema = Joi.object({
-    //idUsuario: idUsuario.required(),
+    idUsuario: idUsuario.required(),
     tipoReporte: tipoReporte.required(),
     fechaGeneracion: fechaGeneracion,
     descripcion: descripcion.required()

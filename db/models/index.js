@@ -30,6 +30,7 @@ function setUpModels(sequelize){
     Feedback.associate(sequelize.models);
     EspacioParqueo.associate(sequelize.models);
     Lote.associate(sequelize.models);
+    Incidencias.associate(sequelize.models);
 }
 
 export default setUpModels;

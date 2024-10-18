@@ -4,7 +4,9 @@ import { models } from '../../libs/sequelize.js';
 //read all
 export const getIncidencias = async(req, res, next) => {
     try{
-        const rta = await models.Incidencias.findAll();
+        const rta = await models.Incidencias.findAll({
+            include: ['usuario']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay incidencias');
         }
@@ -20,7 +22,9 @@ export const getIncidencias = async(req, res, next) => {
 const getIncidencia = async(req, res, next) => {
     try{
         const { idIncidencia } = req.params;
-        const rta = await models.Incidencias.findByPk(idIncidencia);
+        const rta = await models.Incidencias.findByPk(idIncidencia, {
+            include: ['usuario']
+        });
         if(!rta){
             throw boom.notFound('Incidencia no encontrada');
         }
@@ -35,8 +39,8 @@ const getIncidencia = async(req, res, next) => {
 
 const createIncidencia = async(req, res, next) => {
     try{
-        const { tipoReporte, descripcion } = req.body;
-        const data = {tipoReporte, descripcion};
+        const { tipoReporte, descripcion, idUsuario } = req.body;
+        const data = {tipoReporte, descripcion, idUsuario};
         const newIncidencia = await models.Incidencias.create(data);
         if(!newIncidencia){
             throw boom.badRequest('Incidencia no creada');

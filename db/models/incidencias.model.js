@@ -41,6 +41,10 @@ const incidenciasSchema = {
 
 class Incidencias extends Model {
     static associate(models){
+        this.belongsTo(models.Usuario, {
+            as: 'usuario',
+            foreignKey: 'idUsuario'
+        })
 
     }
 

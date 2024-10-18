@@ -75,6 +75,10 @@ class Usuario extends Model {
             as: 'historialParqueo',
             foreignKey: 'idUsuario'
         });
+        this.hasMany(models.Incidencias, {
+            as: 'incidencias',
+            foreignKey: 'idUsuario'
+        })
     }
     static config(sequelize) {
         return {
