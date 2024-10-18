@@ -66,10 +66,10 @@ const historialParqueoSchema = {
 
 class HistorialParqueo extends Model {
     static associate(models) {
-        /*this.hasOne(models.Pagos, {
+        this.hasOne(models.Pagos, {
             as: 'pagos',
-            foreignKey: 'idHistorial'
-        })*/
+            foreignKey: 'idHistorialParqueo'
+        })
         this.belongsTo(models.Usuario, {
            as: 'Usuario',
            foreignKey: 'idUsuario'
