@@ -34,7 +34,11 @@ class EspacioParqueo extends Model {
         this.hasMany(models.Reserva, {
             as: 'reservas',
             foreignKey: 'idEspacioParqueo'
-        })
+        });
+        this.belongsTo(models.Lote, {
+            as: 'lote',
+            foreignKey: 'idLote'
+        });
         
     }
 

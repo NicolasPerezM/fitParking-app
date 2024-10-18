@@ -27,7 +27,10 @@ const loteSchema = {
 
 class Lote extends Model {
     static associate(models) {
-        
+        this.hasMany(models.EspacioParqueo, {
+            as: 'espacioParqueo',
+            foreignKey: 'idLote'
+        })
     }
 
     static config(sequelize) {

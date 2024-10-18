@@ -4,7 +4,9 @@ import { models } from '../../libs/sequelize.js';
 //read all
 export const getEspaciosParqueo = async(req, res, next) => {
     try{
-        const rta = await models.EspacioParqueo.findAll();
+        const rta = await models.EspacioParqueo.findAll({
+            include: ['lote']
+        });
         if(rta.length === 0){
             throw boom.notFound('No hay espacios creados');
         }
@@ -19,8 +21,8 @@ export const getEspaciosParqueo = async(req, res, next) => {
 export const getEspacioParqueoById = async(req, res, next) => {
     try{
         const { idEspacioParqueo } = req.params;
-        const rta = await models.EspacioParqueo.findOne({
-            where: {idEspacioParqueo: idEspacioParqueo}
+        const rta = await models.EspacioParqueo.findByPk(idEspacioParqueo, {
+            include: ['lote']
         });
         if(!rta){
             throw boom.notFound('Espacio no encontrado');
@@ -36,8 +38,8 @@ export const getEspacioParqueoById = async(req, res, next) => {
 
 const createEspacioParqueo = async(req, res, next) => {
     try{
-        const { estado } = req.body;
-        const data = { estado }
+        const { estado, idLote } = req.body;
+        const data = { estado, idLote }
         const newEspacioParqueo = await models.EspacioParqueo.create(data);
         if(!newEspacioParqueo){
             throw boom.badRequest('Espacio no creado');
