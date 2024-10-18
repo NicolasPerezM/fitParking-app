@@ -29,22 +29,24 @@ const historialParqueoSchema = {
     idVehiculo: {
         field: 'id_vehiculo',
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: VEHICULOS_TABLE,
             key: 'id_vehiculo'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     idEspacioParqueo: {
         field: 'id_espacio_parqueo',
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
             model: ESPACIOPARQUEO_TABLE,
             key: 'id_espacio_parqueo'
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
     },
     fechaEntrada: {
         allowNull: false,
@@ -76,6 +78,10 @@ class HistorialParqueo extends Model {
            as: 'vehiculo',
            foreignKey: 'idVehiculo'
        });
+       this.belongsTo(models.EspacioParqueo, {
+           as: 'espacioParqueo',
+           foreignKey: 'idEspacioParqueo'
+        });
     }
 
     static config(sequelize){
