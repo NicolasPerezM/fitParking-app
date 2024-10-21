@@ -3,6 +3,7 @@
 import boom from '@hapi/boom';
 import sequelize from '../../libs/sequelize.js';
 import { models } from '../../libs/sequelize.js';
+import bcrypt from 'bcrypt';
 
 
 //read all
@@ -40,11 +41,13 @@ export const getUserById = async (req, res, next) => {
 export const createUser = async (req, res, next) => {
     try{
         const {Nombres, Apellidos, CorreoElectronico, Contrasena, Telefono} = req.body;
-        const data = {Nombres, Apellidos, CorreoElectronico, Contrasena, Telefono};
+        const hashedPassword = await bcrypt.hash(Contrasena, 10);
+        const data = {Nombres, Apellidos, CorreoElectronico, Contrasena: hashedPassword, Telefono};
         const newUser = await models.Usuario.create(data);
         if(!newUser) {
             throw boom.notFound('Usuario no creado');
         }
+        delete newUser.dataValues.Contrasena;
         res.status(201).json(newUser);
     }
     catch(err){

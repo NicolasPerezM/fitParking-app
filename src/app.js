@@ -14,7 +14,7 @@ import feedbackRoutes from './routes/feedback.route.js';
 import espacioParqueoRoutes from './routes/espacioParqueo.route.js';
 import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
-
+import checkApiKey  from '../middlewares/auth.handler.js';
 //Inicializaciones
 const app =  express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -52,6 +52,10 @@ app.get('/', (req, res) => {
 app.get('/api/v1/usuarios/crearUsuario', (req, res) => {
     res.render('crearUsuario', { layout: './layouts/sidebar' });
 });
+
+app.get('/api/v1/nuevaRuta', checkApiKey, (req, res) => {
+    res.send('nueva ruta');
+})
 
 //app.get('/api/v1/usuarios', usuariosRoutes);
 app.use('/api/v1/usuarios', usuariosRoutes);
