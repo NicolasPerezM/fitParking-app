@@ -20,6 +20,18 @@ export const getUsers = async (req, res, next) => {
     }
 }
 
+// Esta función no depende de `req`, `res` o `next`, solo busca el usuario por email
+export const findByEmail = async (CorreoElectronico) => {
+    try {
+      const user = await models.Usuario.findOne({
+        where: { CorreoElectronico: CorreoElectronico },
+      });
+      return user;
+    } catch (err) {
+      throw err;
+    }
+};
+  
 //read by ID
 export const getUserById = async (req, res, next) => {
     try{
@@ -110,5 +122,6 @@ export const methods = {
     getUserById,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    findByEmail
 }

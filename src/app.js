@@ -12,6 +12,7 @@ import inidenciaRoutes from './routes/incidencias.route.js';
 import historialParqueoRoutes from './routes/historialParqueo.route.js'
 import feedbackRoutes from './routes/feedback.route.js';
 import espacioParqueoRoutes from './routes/espacioParqueo.route.js';
+import authRoutes from './routes/auth.router.js';
 import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
 import checkApiKey  from '../middlewares/auth.handler.js';
@@ -42,6 +43,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+import './utils/auth/index.js';
 
 //rutas
 
@@ -68,6 +70,7 @@ app.use('/api/v1/incidencias', inidenciaRoutes);
 app.use('/api/v1/historialParqueo', historialParqueoRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/espacioParqueo', espacioParqueoRoutes);
+app.use('/api/v1/auth', authRoutes);
 //middlewares-err
 
 app.use(logErrors);
