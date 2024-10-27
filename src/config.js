@@ -9,6 +9,7 @@ export default {
     user: process.env.USER || 'root',
     password: process.env.PASSWORD || '',
     database: process.env.DATABASE || 'fitparkingapp',
-    apiKey: process.env.API_KEY || '1234'
+    apiKey: process.env.API_KEY || '1234',
+    jwtSecret: process.env.JWT_SECRET
 }
 
