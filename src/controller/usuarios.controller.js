@@ -52,9 +52,9 @@ export const getUserById = async (req, res, next) => {
 //create
 export const createUser = async (req, res, next) => {
     try{
-        const {Nombres, Apellidos, CorreoElectronico, Contrasena, Telefono} = req.body;
+        const {Nombres, Apellidos, CorreoElectronico, Contrasena, Telefono, rol} = req.body;
         const hashedPassword = await bcrypt.hash(Contrasena, 10);
-        const data = {Nombres, Apellidos, CorreoElectronico, Contrasena: hashedPassword, Telefono};
+        const data = {Nombres, Apellidos, CorreoElectronico, Contrasena: hashedPassword, Telefono, rol};
         const newUser = await models.Usuario.create(data);
         if(!newUser) {
             throw boom.notFound('Usuario no creado');
@@ -72,7 +72,7 @@ export const createUser = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
     try{
         const {idUsuario} = req.params;
-        const rta = await models.Usuario.destroy({where: {idUsuarios: idUsuario}});
+        const rta = await models.Usuario.destroy({where: {idUsuario: idUsuario}});
         if(!rta) {
             throw boom.notFound('Usuario no encontrado');
         }

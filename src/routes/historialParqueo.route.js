@@ -2,6 +2,8 @@ import Router from 'express';
 import { methodsHistorialParqueo as historialParqueoController } from '../controller/historialParqueo.controller.js';
 import validatorHandler from '../../middlewares/validator.handler.js';
 import { createHistorialParqueoSchema, getHistorialParqueoSchema } from '../../schemas/historialParqueo.schema.js';
+import passport from 'passport';
+import { checkRoles  } from '../../middlewares/auth.handler.js';
 
 const router = Router();
 
@@ -13,6 +15,8 @@ router.get('/:idHistorialParqueo',
     historialParqueoController.getHistorialParqueoById);
 
 router.post('/crearHistorialParqueo',
+    passport.authenticate('jwt', { session: false }), //verifica que el usuario este autenticado
+    checkRoles('admin'), //verifica que el rol sea admin
     validatorHandler(createHistorialParqueoSchema, 'body'),
     historialParqueoController.createHistorialParqueo);
 

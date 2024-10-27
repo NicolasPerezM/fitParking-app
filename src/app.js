@@ -15,7 +15,7 @@ import espacioParqueoRoutes from './routes/espacioParqueo.route.js';
 import authRoutes from './routes/auth.router.js';
 import { logErrors, errorHandler, boomErrorHandler } from '../middlewares/error.handler.js';
 import expressLayouts from 'express-ejs-layouts';
-import checkApiKey  from '../middlewares/auth.handler.js';
+import { checkApiKey } from '../middlewares/auth.handler.js'; //checkApiKey  from '../middlewares/auth.handler.js';
 //Inicializaciones
 const app =  express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
