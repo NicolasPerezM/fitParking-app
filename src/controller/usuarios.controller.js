@@ -60,7 +60,8 @@ export const createUser = async (req, res, next) => {
             throw boom.notFound('Usuario no creado');
         }
         delete newUser.dataValues.Contrasena;
-        res.status(201).json(newUser);
+        //res.status(201).json(newUser);
+        res.redirect('/api/v1/usuarios/dashboardUser');
     }
     catch(err){
         next(err);

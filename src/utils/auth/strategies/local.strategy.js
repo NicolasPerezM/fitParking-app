@@ -12,14 +12,14 @@ const localStrategy = new Strategy(
     try {
       const user = await usuariosController.findByEmail(CorreoElectronico);
       if (!user) {
-        done(boom.unauthorized(), false);
+       return done(boom.unauthorized(), false);
       }
       const isMatch = await bcrypt.compare(Contrasena, user.Contrasena);
       if (!isMatch) {
-        done(boom.unauthorized(), false);
+        return done(boom.unauthorized(), false);
       }
       delete user.Contrasena;
-      done(null, user);
+      return done(null, user);
     } catch (err) {
       done(err, false);
     }

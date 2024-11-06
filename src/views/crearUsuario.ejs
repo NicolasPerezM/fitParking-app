@@ -16,16 +16,19 @@
                  <label for="Apellidos">Apellidos</label>
                  <input type="text" name="Apellidos" id="Apellidos" placeholder="1111111" required class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
                </div>
-               
+               <div class="flex flex-col gap-1">
+                <label for="Telefono">Telefono</label>
+                <input type="number" name="Telefono" id="Telefono" required class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
+                </div>
                <div class="flex flex-col gap-1">
                  <label for="CorreoElectronico">Correo Electrónico</label>
                  <input type="email" id="CorreoElectronico" name="CorreoElectronico" placeholder="correo@electronico.com" class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
                </div>
                <div class="flex flex-col gap-1">
-                <label for="Telefono">Telefono</label>
-                <input type="number" name="Telefono" id="Telefono" required class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
+                <label for="Contrasena">Contraseña</label>
+                <input type="password" id="Constrasena" name="Contrasena" placeholder="**********" class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
               </div>
-               <button href="/" type="submit" class="bg-main-yellow py-2 mt-3 rounded-md text-black font-semibold hover:bg-transparent border-2 border-main-yellow hover:text-white transition duration-300">Crea tu cuenta</button>
+               <a href="/api/v1/usuarios/dashboardUser"><button type="submit" class="bg-main-yellow py-2 mt-3 rounded-md text-black font-semibold hover:bg-transparent border-2 border-main-yellow hover:text-white transition duration-300">Crea tu cuenta</button></a>
              </form>
              <div class="flex w-full relative items-center gap-2">
                <div class="border-t w-full border-gray-400"></div>

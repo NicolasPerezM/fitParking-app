@@ -24,3 +24,35 @@ const selectCliente  =  () => {
 
 adminBtn.addEventListener('click', selectAdmin)
 clienteBtn.addEventListener('click', selectCliente)
+
+
+//logica para el login
+
+const URL_LOGIN = 'http://localhost:3000/api/v1/auth/login'
+const loginForm = document.getElementById('loginForm');
+
+loginForm.addEventListener('submit', async(event) => {
+    event.preventDefault();
+    const data = {
+        CorreoElectronico: document.getElementById('CorreoElectronico').value,
+        Contrasena: document.getElementById('Contrasena').value
+    }
+
+    try {
+        const res = await fetch(URL_LOGIN, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if(!res.ok){
+            throw new Error('Error en la solicitud: ' + res.statusText)
+        }
+
+        window.location.href = 'http://localhost:3000/api/v1/usuarios/dashboardUser'
+    } catch (err) {
+        console.error(err)
+    }
+})
