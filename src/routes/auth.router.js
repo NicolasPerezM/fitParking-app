@@ -20,7 +20,13 @@ router.post(
                 user, 
                 token
             });*/
-      res.redirect("http://localhost:3000/api/v1/usuarios/dashboardUser");
+      res
+        .cookie("access_token", token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "strict",
+        })
+        .redirect("http://localhost:3000/api/v1/usuarios/dashboardUser");
     } catch (err) {
       next(err);
     }

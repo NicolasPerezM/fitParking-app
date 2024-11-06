@@ -21,6 +21,8 @@ import {
 import expressLayouts from "express-ejs-layouts";
 import { checkApiKey, checkRoles } from "../middlewares/auth.handler.js"; //checkApiKey  from '../middlewares/auth.handler.js';
 import passport from "passport";
+import "./utils/auth/index.js";
+import cookieParser from "cookie-parser";
 
 //Inicializaciones
 const app = express();
@@ -48,8 +50,9 @@ app.set("views", join(__dirname, "views"));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-import "./utils/auth/index.js";
+
 
 //rutas
 
@@ -64,7 +67,7 @@ app.get("/api/v1/usuarios/crearUsuario", (req, res) => {
 app.get(
   "/api/v1/usuarios/dashboardUser",
   passport.authenticate("jwt", { session: false }),
-  checkRoles('usuario'),
+  //checkRoles('usuario'),
   (req, res) => {
     res.render("dashboardUser", { layout: "./layouts/sidebar" });
   }
