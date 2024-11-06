@@ -69,7 +69,7 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   //checkRoles('usuario'),
   (req, res) => {
-    res.render("dashboardUser", { layout: "./layouts/sidebar" });
+    res.render("dashboardUser", { layout: "./layouts/layoutUser" });
   }
 );
 

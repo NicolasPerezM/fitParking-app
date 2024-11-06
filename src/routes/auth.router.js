@@ -33,4 +33,12 @@ router.post(
   }
 );
 
+router.post(
+  "/logout", 
+  (req, res) => {
+  res
+    .clearCookie("access_token")
+    .redirect("http://localhost:3000/");
+});
+
 export default router;

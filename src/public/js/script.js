@@ -1,5 +1,5 @@
 
-const clienteBtn    =   document.getElementById('clienteBtn');
+/*const clienteBtn    =   document.getElementById('clienteBtn');
 const adminBtn      =   document.getElementById('adminBtn');
 
 const selectAdmin  =  () => {
@@ -23,7 +23,7 @@ const selectCliente  =  () => {
 }
 
 adminBtn.addEventListener('click', selectAdmin)
-clienteBtn.addEventListener('click', selectCliente)
+clienteBtn.addEventListener('click', selectCliente)*/
 
 
 //logica para el login
@@ -56,3 +56,25 @@ loginForm.addEventListener('submit', async(event) => {
         console.error(err)
     }
 })
+
+//logica para el logout
+
+/*const urlLogout = 'http://localhost:3000/api/v1/auth/logout'
+const cerrarSesionUserBtn = document.getElementById('cerrarSesionUserBtn')
+
+cerrarSesionUserBtn.addEventListener('click', async () => {
+    try{
+        console.log('clicked logout')
+        const res = await fetch(urlLogout, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        if(!res.ok){
+            throw new Error('Error en la solicitud: ' + res.statusText)
+        }
+    } catch (err) {
+        console.error(err)
+    }
+})*/
