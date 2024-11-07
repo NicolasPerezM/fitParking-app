@@ -11,8 +11,10 @@ export default {
         'login-img': "url('/images/login-imageBackground.jpeg')"
       },
       colors: {
-        'main-yellow': '#F2C40D',
-        'main-black': '#0D0D0D'
+        'main-yellow': '#F6C90E',
+        'main-black': '#303841',
+        'secundary-light': '#EEEEEE',
+        'secundary-dark': '#3A4750',
       }
     },
   },

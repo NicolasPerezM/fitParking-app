@@ -24,6 +24,7 @@ import passport from "passport";
 import "./utils/auth/index.js";
 import cookieParser from "cookie-parser";
 
+
 //Inicializaciones
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -49,7 +50,7 @@ app.set("views", join(__dirname, "views"));
 //middlewares
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
@@ -67,9 +68,18 @@ app.get("/api/v1/usuarios/crearUsuario", (req, res) => {
 app.get(
   "/api/v1/usuarios/dashboardUser",
   passport.authenticate("jwt", { session: false }),
-  //checkRoles('usuario'),
+  checkRoles('usuario'),
   (req, res) => {
     res.render("dashboardUser", { layout: "./layouts/layoutUser" });
+  }
+);
+
+app.get(
+  "/api/v1/usuarios/dashboardAdmin",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles('admin'),
+  (req, res) => {
+    res.render("dashboardAdmin", { layout: "./layouts/layoutAdmin" });
   }
 );
 

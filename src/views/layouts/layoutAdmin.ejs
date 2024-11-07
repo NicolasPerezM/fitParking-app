@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/output.css" rel="stylesheet">
+    <link href="/css/input.css" rel="stylesheet">
+</head>
+<body class="">
+    <%- include('../partials/sidebarAdmin') %>
+    <%- body %>
+    <%- include('../partials/footer') %>
+</body>
+<script>
+    //logica para el logout
+
+    const urlLogout = 'http://localhost:3000/api/v1/auth/logout'
+    const cerrarSesionAdminBtn = document.getElementById('cerrarSesionAdminBtn')
+    
+    cerrarSesionAdminBtn.addEventListener('click', async () => {
+        try{
+            const res = await fetch(urlLogout, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            if(!res.ok){
+                throw new Error('Error en la solicitud: ' + res.statusText)
+            }
+            window.location.href = 'http://localhost:3000/' //se debe redirigir a un home y no al login
+        } catch (err) {
+            console.error(err)
+        }
+    })
+
+</script>
+</html>

@@ -1,57 +1,73 @@
-<section class="bg-general bg-cover bg-center w-screen flex flex-col items-center h-auto">
-    <article class="w-3/5 px-2 py-10 flex flex-col gap-4">
-        <div>
-            <h2 class="text-4xl font-semibold">Bienvenida de vuelta, <span class="text-main-yellow">Lily</span></h2>
-            <p class="italic text-[0.9rem]">Tú Dashboard</p>
-        </div>
+<section class="bg-main-black bg-cover bg-center w-screen flex flex-col items-center gap-5 h-auto text-secundary-light">
+    <article class="w-3/5 px-2 py-10 flex flex-col gap-2">
+        <h2 class="text-5xl font-semibold">Bienvenida de vuelta, <span class="text-main-yellow">Lily</span></h2>
+        <p class="italic text-[1.5rem] text-main-yellow">Tú Dashboard</p>
+    </article>
+    
+    <article class="w-3/5 px-6 py-4 flex flex-col gap-4 bg-secundary-dark rounded-md shadow-xl">
+        <h3 class="text-2xl font-semibold text-start">Estacionamiento actual</h3>
         <div class="flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-                <h3 class="text-2xl font-semibold">Estacionamiento actual</h3>
+            <div class="flex justify-between">
                 <div class="flex items-center gap-4">
                     <i class="fa-solid fa-location-dot text-xl"></i>
                     <div>
-                        <h6 class="font-medium ">Válido hasta las 10:00 pm</h6>
+                        <div class="flex gap-4">
+                            <h6 class="font-medium ">Tiempo transcurrido</h6>
+                            <p class="text-main-yellow">10:00 Minutos</p>  <! se deber hacer la logica del timer -->
+                        </div>
                         <p class="italic text-[0.9rem] text-gray-400"">Parking Florida, 123 Mission st</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
                     <i class="fa-solid fa-ticket-simple text-xl"></i>
-                    <p class="text-gray-400"">$15:00</p>
-                    <button class="bg-main-yellow px-2 py-1 rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white transition duration-500">Extender</button>
+                    <p class="text-gray-400"">$15:00</p> <! se deber hacer la logica del pago -->
+                    <button class="bg-main-yellow px-2 py-1 rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white transition duration-500 w-32">Pagar</button>
+                    <button class="bg-main-yellow px-2 py-1 rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white transition duration-500 w-32">Extender</button>
                 </div>
-            </div>
-            
+            </div>      
         </div>
     </article>
-    <article class="flex flex-col gap-4 w-3/5 px-2">
-        <h2 class="text-3xl font-semibold">Subscriptions</h2>
-        <div class="flex gap-6 border border-gray-400 rounded-md">
-            <img src="../images/parking1.jpeg" alt="imagen de parqueadero 1" class="w-80 h-60 rounded-md">
-            <div class="flex flex-col justify-between p-2 w-full">
-                <div class="flex flex-col gap-1">
-                    <p class="italic text-gray-400">Empieza en 4 días</p>
-                    <h6 class="text-xl font-semibold">Estacionamiento diario</h6>
-                    <p class="italic text-gray-400"">Fecha</p>
-                    <p class="italic text-gray-400"">Expira en 1 día</p>
-                </div>
-                <div class="w-full">
-                    <button class="bg-main-yellow w-full rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white transition duration-500"">Extender reservación</button>
-                </div>
-            </div>
-        </div>
-        <div class="flex gap-6 border border-gray-400 rounded-md">
-            <img src="../images/parking2.jpeg" alt="imagen de parqueadero 1" class="w-80 h-60 rounded-md">
-            <div class="flex flex-col justify-between p-2 w-full">
-                <div class="flex flex-col gap-1">
-                    <p class="italic text-gray-400">Empieza en 7 días</p>
-                    <h6 class="text-xl font-semibold">Estacionamiento semnal</h6>
-                    <p class="italic text-gray-400"">Fecha</p>
-                    <p class="italic text-gray-400"">Expira en 15 días</p>
-                </div>
-                <div class="w-full">
-                    <button class="bg-main-yellow w-full rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white">Extender reservación</button>
-                </div>
-            </div>
-        </div>
+    <article class="w-3/5 px-6 py-4 flex flex-col gap-4 bg-secundary-dark rounded-md shadow-xl">
+        <h3 class="text-2xl font-semibold">Actividad reciente</h3>
+        <table class="w-full">
+            <thead class="bg-main-black">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-secundary-light uppercase tracking-wider">Date</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-secundary-light uppercase tracking-wider">Type</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-secundary-light uppercase tracking-wider">Location</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-secundary-light uppercase tracking-wider">Amount</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-secundary-light uppercase tracking-wider">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-secundary-light">
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">2024-02-20</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">Parking</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">Spot A-123</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">$15.00</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                  <span class="px-2 py-1 text-xs font-medium rounded-full bg-main-yellow bg-opacity-80 text-main-black">Completed</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">2024-02-19</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">Payment</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">Wallet Reload</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">$50.00</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-main-yellow bg-opacity-80 text-main-black">Completed</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">2024-02-18</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">Parking</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">Spot B-101</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">$10.00</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-main-yellow bg-opacity-80 text-main-black">Completed</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
     </article>
 </section>

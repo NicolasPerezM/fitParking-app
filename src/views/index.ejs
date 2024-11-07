@@ -1,44 +1,84 @@
-
 <body class="text-[18px] text-white overflow-x-hidden">
-
   <!---------------------------------------------------------------->
   <!------------SECCIÓN DE INICIO DE SESIÓN------------------------->
   <!---------------------------------------------------------------->
 
-  <section class="bg-general bg-cover bg-center h-auto w-screen flex justify-center items-center">
+  <section
+    class="bg-general bg-cover bg-center h-auto w-screen flex justify-center items-center"
+  >
     <article class="container w-[420px] h-auto flex flex-col gap-6 mt-8">
-        <div class="h-96 bg-login-img bg-cover bg-center rounded-2xl flex flex-col justify-end">
-            <div class="mb-12 ml-auto mr-auto flex flex-col gap-4 text-center">
-                <h2 class="text-4xl text-main-yellow font-bold">Bienvenido a <span class="text-black">fit</span>Parking</h2>
-                <p class="font-semibold">La forma más rapida de parquear</p>
-            </div>            
+      <div
+        class="h-96 bg-login-img bg-cover bg-center rounded-2xl flex flex-col justify-end"
+      >
+        <div class="mb-12 ml-auto mr-auto flex flex-col gap-4 text-center">
+          <h2 class="text-4xl text-main-yellow font-bold">
+            Bienvenido a <span class="text-black">fit</span>Parking
+          </h2>
+          <p class="font-semibold">La forma más rapida de parquear</p>
         </div>
-        <div class="max-w-full flex justify-between">
-            <button id="clienteBtn" class="border-2 rounded-sm border-main-yellow py-2 px-3 bg-black bg-opacity-80">Iniciar como cliente</button>
-            <span>ó</span>
-            <button id="adminBtn" class="border-2 py-2 px-3 border-gray-700 bg-main-black">Iniciar como admin</button>
+      </div>
+      <div class="max-w-full flex justify-between">
+        <button
+          id="clienteBtn"
+          class="border-2 rounded-sm border-main-yellow py-2 px-3 bg-black bg-opacity-80"
+        >
+          Iniciar como cliente
+        </button>
+        <span>ó</span>
+        <button
+          id="adminBtn"
+          class="border-2 py-2 px-3 border-gray-700 bg-main-black"
+        >
+          Iniciar como admin
+        </button>
+      </div>
+      <form
+        action="/api/v1/auth/login"
+        method="POST"
+        class="flex flex-col gap-4"
+        id="loginForm"
+      >
+        <div class="flex flex-col gap-1">
+          <label for="CorreoElectronico">Correo Electrónico</label>
+          <input
+            type="email"
+            id="CorreoElectronico"
+            name="CorreoElectronico"
+            placeholder="correo@electronico.com"
+            class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm"
+          />
         </div>
-        <form action="" method="POST" class="flex flex-col gap-4" id="loginForm">
-            <div class="flex flex-col gap-1">
-                <label for="CorreoElectronico">Correo Electrónico</label>
-                <input type="email" id="CorreoElectronico" name="CorreoElectronico" placeholder="correo@electronico.com" class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
-            </div>
-            <div class="flex flex-col gap-1">
-                <label for="Constrasena">Contraseña</label>
-                <input type="password" name="Constrasena" id="Contrasena" placeholder="**********" required class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm">
-            </div>
-            
-            <button type="submit" class="bg-main-yellow py-2 mt-3 rounded-md text-black font-semibold hover:bg-transparent border-2 border-main-yellow hover:text-white transition duration-300">Iniciar sesión</button>
-        </form>
-        <div class="text-center w-full flex flex-col gap-2">
-            <div class="w-full flex gap-2 justify-center">
-                <p class="">¿Olvidó su cobtraseña?</p><a href="" class="text-main-yellow">Click aquí</a>
-            </div>
-            <div class="w-full flex gap-2 justify-center">
-                <p>¿No tiene cuenta con FitParking?</p><a href="/api/v1/usuarios/crearUsuario" class="text-main-yellow">Click aquí</a>
-            </div> 
+        <div class="flex flex-col gap-1">
+          <label for="Contrasena">Contraseña</label>
+          <input
+            type="password"
+            name="Contrasena"
+            id="Contrasena"
+            placeholder="**********"
+            required
+            class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm"
+          />
         </div>
-    </article>   
+
+        <button
+          type="submit"
+          class="bg-main-yellow py-2 mt-3 rounded-md text-black font-semibold hover:bg-transparent border-2 border-main-yellow hover:text-white transition duration-300"
+        >
+          Iniciar sesión
+        </button>
+      </form>
+      <div class="text-center w-full flex flex-col gap-2">
+        <div class="w-full flex gap-2 justify-center">
+          <p class="">¿Olvidó su cobtraseña?</p>
+          <a href="" class="text-main-yellow">Click aquí</a>
+        </div>
+        <div class="w-full flex gap-2 justify-center">
+          <p>¿No tiene cuenta con FitParking?</p>
+          <a href="/api/v1/usuarios/crearUsuario" class="text-main-yellow"
+            >Click aquí</a
+          >
+        </div>
+      </div>
+    </article>
   </section>
- 
 </body>

@@ -20,13 +20,17 @@ router.post(
                 user, 
                 token
             });*/
-      res
-        .cookie("access_token", token, {
+      res.cookie("access_token", token, {
           httpOnly: true,
           secure: false,
           sameSite: "strict",
         })
-        .redirect("http://localhost:3000/api/v1/usuarios/dashboardUser");
+
+      const redirectUrl = user.rol === "admin"
+      ? "http://localhost:3000/api/v1/usuarios/dashboardAdmin"
+      : "http://localhost:3000/api/v1/usuarios/dashboardUser";
+
+      res.redirect(redirectUrl);
     } catch (err) {
       next(err);
     }
