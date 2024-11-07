@@ -1,83 +1,99 @@
-<body class="text-[18px] text-white overflow-x-hidden">
+<body class="text-[18px] text-white">
   <!---------------------------------------------------------------->
   <!------------SECCIÓN DE INICIO DE SESIÓN------------------------->
   <!---------------------------------------------------------------->
 
   <section
-    class="bg-general bg-cover bg-center h-auto w-screen flex justify-center items-center"
+    class="bg-general text-primary-light bg-cover bg-center h-auto flex justify-center items-center w-full"
   >
-    <article class="container w-[420px] h-auto flex flex-col gap-6 mt-8">
+    <article class="container w-[560px] h-auto flex flex-col gap-6 mt-8 mb-8">
       <div
         class="h-96 bg-login-img bg-cover bg-center rounded-2xl flex flex-col justify-end"
       >
         <div class="mb-12 ml-auto mr-auto flex flex-col gap-4 text-center">
-          <h2 class="text-4xl text-main-yellow font-bold">
-            Bienvenido a <span class="text-black">fit</span>Parking
+          <h2 class="text-5xl text-main-yellow font-bold">
+            Bienvenido a <span class="text-secundary-light">fit</span>Parking
           </h2>
-          <p class="font-semibold">La forma más rapida de parquear</p>
+          <p class="font-semibold text-secundary-light text-2xl">La forma más rapida de parquear</p>
         </div>
       </div>
-      <div class="max-w-full flex justify-between">
-        <button
-          id="clienteBtn"
-          class="border-2 rounded-sm border-main-yellow py-2 px-3 bg-black bg-opacity-80"
-        >
-          Iniciar como cliente
-        </button>
-        <span>ó</span>
-        <button
-          id="adminBtn"
-          class="border-2 py-2 px-3 border-gray-700 bg-main-black"
-        >
-          Iniciar como admin
-        </button>
-      </div>
-      <form
-        action="/api/v1/auth/login"
-        method="POST"
-        class="flex flex-col gap-4"
-        id="loginForm"
-      >
-        <div class="flex flex-col gap-1">
-          <label for="CorreoElectronico">Correo Electrónico</label>
-          <input
-            type="email"
+      <form class="space-y-4" action="/api/v1/auth/login" method="POST" id="loginForm">
+        <div>
+          <label class="block text-lg font-medium text-gray-300 mb-1">Correo Electrónico</label>
+          <input 
+            type="email" 
             id="CorreoElectronico"
             name="CorreoElectronico"
-            placeholder="correo@electronico.com"
-            class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm"
-          />
-        </div>
-        <div class="flex flex-col gap-1">
-          <label for="Contrasena">Contraseña</label>
-          <input
-            type="password"
-            name="Contrasena"
-            id="Contrasena"
-            placeholder="**********"
+            class="px-4 py-2 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light"
+            placeholder="tucorreo@email.com"
             required
-            class="bg-main-black border border-gray-700 focus:border-main-yellow px-1 py-2 outline-none rounded-sm"
-          />
+          >
         </div>
 
-        <button
-          type="submit"
-          class="bg-main-yellow py-2 mt-3 rounded-md text-black font-semibold hover:bg-transparent border-2 border-main-yellow hover:text-white transition duration-300"
+        <div>
+          <label class="block text-lg font-medium text-gray-300 mb-1">Contraseña</label>
+          <input 
+            type="password"
+            id="Contrasena"
+            name="Contrasena" 
+            class="px-4 py-2 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light"
+            placeholder="••••••••"
+            required
+          >
+        </div>
+
+        <div class="flex items-center justify-between text-sm">
+          <label class="flex items-center text-gray-300">
+            <input type="checkbox" class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-800">
+            <span class="ml-2">Recuerdame</span>
+          </label>
+          <a href="#" class="text-main-yellow hover:text-secundary-light">Olvidó su contraseña?</a>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full text-lg py-2 px-4 border border-main-yellow bg-main-yellow hover:bg-transparent hover:text-main-yellow hover:border-main-yellow text-main-black font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-main-yellow focus:ring-offset-1 focus:ring-offset-main-yellow transition-colors"
         >
           Iniciar sesión
         </button>
       </form>
-      <div class="text-center w-full flex flex-col gap-2">
-        <div class="w-full flex gap-2 justify-center">
-          <p class="">¿Olvidó su cobtraseña?</p>
-          <a href="" class="text-main-yellow">Click aquí</a>
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-gray-600"></div>
         </div>
-        <div class="w-full flex gap-2 justify-center">
-          <p>¿No tiene cuenta con FitParking?</p>
-          <a href="/api/v1/usuarios/crearUsuario" class="text-main-yellow"
-            >Click aquí</a
+        <div class="relative flex justify-center text-sm">
+          <span class="px-2 bg-gray-800 text-secundary-light">ó</span>
+        </div>
+      </div>
+      <button 
+            class="w-full flex items-center justify-center px-4 py-2 border border-main-black rounded-lg text-secundary-light hover:bg-main-yellow focus:outline-none focus:ring-2 focus:ring-main-yellow focus:ring-offset-1 focus:ring-offset-main-yellow transition-colors hover:text-main-black text-lg font-bold"
           >
-        </div>
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="currentColor"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="currentColor"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="currentColor"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            Iniciar con Google
+          </button>
+
+          
+          <div class="text-center text-sm text-gray-400">
+            No tiene una cuenta?
+            <a href="#" class="text-main-yellow hover:text-secundary-light font-medium">Crear cuenta</a>
+          </div>
       </div>
     </article>
   </section>

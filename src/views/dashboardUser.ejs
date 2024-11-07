@@ -1,10 +1,10 @@
-<section class="bg-main-black bg-cover bg-center w-screen flex flex-col items-center gap-5 h-auto text-secundary-light">
-    <article class="w-3/5 px-2 py-10 flex flex-col gap-2">
+<section class="bg-general bg-cover bg-center h-auto flex flex-col gap-5 pl-8 text-secundary-light w-full">
+    <article class="px-2 pt-8 flex flex-col gap-2">
         <h2 class="text-5xl font-semibold">Bienvenida de vuelta, <span class="text-main-yellow">Lily</span></h2>
         <p class="italic text-[1.5rem] text-main-yellow">Tú Dashboard</p>
     </article>
     
-    <article class="w-3/5 px-6 py-4 flex flex-col gap-4 bg-secundary-dark rounded-md shadow-xl">
+    <article class="w-4/5 px-6 py-4 flex flex-col gap-4 bg-main-black rounded-md shadow-xl">
         <h3 class="text-2xl font-semibold text-start">Estacionamiento actual</h3>
         <div class="flex flex-col gap-4">
             <div class="flex justify-between">
@@ -27,7 +27,29 @@
             </div>      
         </div>
     </article>
-    <article class="w-3/5 px-6 py-4 flex flex-col gap-4 bg-secundary-dark rounded-md shadow-xl">
+    <article class="w-4/5 px-6 py-4 flex flex-col gap-4 bg-main-black rounded-md shadow-xl">
+      <h3 class="text-2xl font-semibold text-start">Siguiente reservación</h3>
+      <div class="flex flex-col gap-4">
+          <div class="flex justify-between">
+              <div class="flex items-center gap-4">
+                <i class="fa-solid fa-calendar text-3xl text-main-yellow"></i>
+                  <div>
+                      <div class="flex gap-4">
+                          <h6 class="font-medium ">Mañana</h6>
+                          <p class="text-main-yellow">10:00 AM</p>  <! se deber hacer la logica del timer -->
+                      </div>
+                      <p class="italic text-[0.9rem] text-gray-400"">Parking Florida, 123 Mission st</p>
+                  </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <button class="bg-main-yellow px-2 py-1 rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white transition duration-500 w-32">Detalles</button>
+                <button class="bg-transparent px-2 py-1 rounded-md text-main-black font-semibold border border-main-yellow hover:bg-transparent hover:text-white transition duration-500 w-32">Reservas</button>
+                  
+              </div>
+          </div>      
+      </div>
+  </article>
+    <article class="w-4/5 px-6 py-4 flex flex-col gap-4 bg-main-black rounded-md shadow-xl mb-8">
         <h3 class="text-2xl font-semibold">Actividad reciente</h3>
         <table class="w-full">
             <thead class="bg-main-black">
