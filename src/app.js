@@ -61,40 +61,17 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/api/v1/usuarios/crearUsuario", (req, res) => {
-  res.render("crearUsuario", { layout: "./layouts/sidebar" });
-});
-
 app.get(
-  "/api/v1/usuarios/dashboardUser",
+  "/api/v1/historialParqueo/noRegistrado",
   passport.authenticate("jwt", { session: false }),
-  checkRoles('usuario'),
+  checkRoles("admin"),
   (req, res) => {
-    res.render("dashboardUser", { layout: "./layouts/layoutUser" });
+    res.render("admin/agregarNoRegistrado", {
+      layout: "./layouts/layoutAdmin",
+    });
   }
-);
+);//se debe pasar esta ruta a historialParqueoRoutes
 
-app.get(
-  "/api/v1/vehiculos/ingresarVehiculo",
-  passport.authenticate("jwt", { session: false }),
-  checkRoles('admin'),
-  (req, res) => {
-    res.render("ingresarVehiculo", { layout: "./layouts/layoutAdmin" });
-  }
-);
-
-app.get(
-  "/api/v1/usuarios/dashboardAdmin",
-  passport.authenticate("jwt", { session: false }),
-  checkRoles('admin'),
-  (req, res) => {
-    res.render("dashboardAdmin", { layout: "./layouts/layoutAdmin" });
-  }
-);
-
-app.get("/api/v1/nuevaRuta", checkApiKey, (req, res) => {
-  res.send("nueva ruta");
-});
 
 //app.get('/api/v1/usuarios', usuariosRoutes);
 app.use("/api/v1/usuarios", usuariosRoutes);
