@@ -6,15 +6,22 @@ const idVehiculo = Joi.number().integer().min(1);
 const idEspacioParqueo = Joi.number().integer().min(1);
 const fechaEntrada = Joi.date();
 const fechaSalida = Joi.date();
-const tipoIngreso = Joi.string();
+const isRegistered = Joi.boolean();
+const isReserved = Joi.boolean();
+const placa = Joi.string();
+const tipoVehiculo = Joi.string();
+
 
 export const createHistorialParqueoSchema = Joi.object({
-    idUsuario: idUsuario.required(),
-    idVehiculo: idVehiculo.required(),
+    idUsuario: idUsuario,
+    idVehiculo: idVehiculo,
     idEspacioParqueo: idEspacioParqueo.required(),
     fechaEntrada: fechaEntrada,
     fechaSalida: fechaSalida,
-    tipoIngreso: tipoIngreso.required()
+    isRegistered: isRegistered.required(),
+    isReserved: isReserved.required(),
+    placa: placa.required(),
+    tipoVehiculo: tipoVehiculo.required(),
 });
 
 export const updateHistorialParqueoSchema = Joi.object({
@@ -23,9 +30,9 @@ export const updateHistorialParqueoSchema = Joi.object({
     idEspacioParqueo: idEspacioParqueo,
     fechaEntrada: fechaEntrada,
     fechaSalida: fechaSalida,
-    tipoIngreso: tipoIngreso
 });
 
 export const getHistorialParqueoSchema = Joi.object({
     idHistorialParqueo: idHistorialParqueo.required(),
 })
+

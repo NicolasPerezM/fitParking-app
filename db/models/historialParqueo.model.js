@@ -18,7 +18,7 @@ const historialParqueoSchema = {
     idUsuario: {
         field: 'id_usuario',
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: USUARIO_TABLE,
             key: 'id_usuario'
@@ -29,13 +29,18 @@ const historialParqueoSchema = {
     idVehiculo: {
         field: 'id_vehiculo',
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: VEHICULOS_TABLE,
             key: 'id_vehiculo'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+    },
+    isRegistered: {
+        field: 'is_registered',
+        allowNull: false,
+        type: DataTypes.BOOLEAN
     },
     idEspacioParqueo: {
         field: 'id_espacio_parqueo',
@@ -57,10 +62,19 @@ const historialParqueoSchema = {
         allowNull: true,
         type: DataTypes.DATE
     },
-    tipoIngreso: {
-        field: 'tipo_ingreso',
+    isReserved: {
+        field: 'is_reserved',
         allowNull: false,
-        type: DataTypes.ENUM('sin_reserva', 'con_reserva')
+        type: DataTypes.BOOLEAN
+    },
+    placa: {
+        allowNull: false,
+        type: DataTypes.STRING
+    },
+    tipoVehiculo: {
+        field: 'tipo_vehiculo',
+        allowNull: false,
+        type: DataTypes.ENUM('moto', 'carro', 'bicicleta')
     }
 }
 
@@ -95,3 +109,4 @@ class HistorialParqueo extends Model {
 }
 
 export { HISTORIAL_PARQUEO_TABLE, historialParqueoSchema, HistorialParqueo }
+
