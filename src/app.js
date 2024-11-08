@@ -75,6 +75,15 @@ app.get(
 );
 
 app.get(
+  "/api/v1/vehiculos/ingresarVehiculo",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles('admin'),
+  (req, res) => {
+    res.render("ingresarVehiculo", { layout: "./layouts/layoutAdmin" });
+  }
+);
+
+app.get(
   "/api/v1/usuarios/dashboardAdmin",
   passport.authenticate("jwt", { session: false }),
   checkRoles('admin'),
