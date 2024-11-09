@@ -27,7 +27,9 @@
         >
           <div class="flex-1">
             <div class="relative">
-              <label for="search" class="sr-only">Buscar por correo electrónico o nombre</label>
+              <label for="search" class="sr-only"
+                >Buscar por correo electrónico o nombre</label
+              >
               <input
                 type="search"
                 id="search"
@@ -39,9 +41,9 @@
               ></i>
             </div>
           </div>
-          <a href="">
+          <button id="printBtn">
             <i class="fa-solid fa-print text-3xl text-main-yellow"></i>
-          </a>    
+          </button>
         </div>
 
         <!-- Users Table -->
@@ -337,6 +339,35 @@
       } catch (err) {
         tableBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-red-500">Error al cargar los usuarios</td></tr>`;
       }
+    });
+
+    //Print user report logic
+    const printBtn = document.getElementById("printBtn");
+
+    printBtn.addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      //encabezados
+
+      const tableColumn = ["Nombre", "Correo", "Teléfono", "Estado"];
+      const tableRows = [];
+      users.forEach((user) => {
+        const userData = [user.Nombres, user.CorreoElectronico, user.Telefono];
+        tableRows.push(userData);
+
+        doc.autoTable({
+          head: [tableColumn],
+          body: tableRows,
+          startY: 20, // Posición vertical para comenzar
+          theme: "grid", // Estilo de la tabla (puede ser 'striped', 'grid', 'plain')
+        });
+      });
+      // Agregar un título opcional
+      doc.text("Reporte de Usuarios", 14, 15);
+
+      // Guardar el PDF
+      doc.save("reporte_usuarios.pdf");
     });
   </script>
 </section>

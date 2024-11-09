@@ -29,6 +29,7 @@
     "express-handlebars": "^8.0.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
+    "jspdf-invoice-template-nodejs": "^1.4.40",
     "morgan": "^1.10.0",
     "mysql2": "^3.11.3",
     "passport": "^0.7.0",
