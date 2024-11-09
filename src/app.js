@@ -56,10 +56,11 @@ app.use(cookieParser());
 
 
 //rutas
-
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/login", (req, res) => {
+  res.render("login");
 });
+
+
 
 app.get(
   "/api/v1/historialParqueo/noRegistrado",
