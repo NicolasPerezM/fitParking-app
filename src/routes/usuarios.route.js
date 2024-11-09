@@ -14,11 +14,20 @@ const router = Router();
 router.get("/", usuariosController.getUsers);
 
 router.get(
+  "/agregar-usuario",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin"),
+  (req, res) => {
+    res.render("admin/agregarUsuario", { layout: "./layouts/layoutAdmin" });
+  }
+);
+
+router.get(
   "/seccion-usuarios",
   passport.authenticate("jwt", { session: false }),
   checkRoles("admin"),
   (req, res) => {
-    res.render("admin/usuarios", { layout: "./layouts/layoutAdmin" });
+    res.render("admin/seccionUsuarios", { layout: "./layouts/layoutAdmin" });
   }
 );
 

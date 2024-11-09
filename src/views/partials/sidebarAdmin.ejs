@@ -2,12 +2,12 @@
     <div class="flex flex-col gap-4 mt-4 w-4/5" >
         <img src="../images/logoFitP.png" alt="" class="h-20 m-auto">
         <ul class="flex flex-col gap-2">
-            <a href="/api/v1/usuarios/dashboardAdmin"><li class="flex gap-6 py-1 items-center rounded-md px-1  cursor-pointer bg-main-yellow text-main-black font-semibold">
+            <a href="/api/v1/usuarios/dashboardAdmin"><li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500">
                 <i class="fa-solid fa-house"></i>
                 <p>Inicio</p>
             </li></a>
             <a href="./espaciosParqueoAdmin.html">
-                <li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500"">
+                <li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500">
                     <i class="fa-solid fa-car"></i>
                     <p>Espacios</p>
                 </li>
@@ -58,4 +58,16 @@
             <p>Cerrar sesión</p>
         </li>
     </ul>
+    <script >
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('nav a');
+
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('bg-main-yellow', 'text-main-black', 'font-semibold', 'rounded-md');
+                    }   
+            });
+        });
+    </script>
 </nav>

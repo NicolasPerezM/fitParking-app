@@ -61,7 +61,13 @@ export const createUser = async (req, res, next) => {
         }
         delete newUser.dataValues.Contrasena;
         //res.status(201).json(newUser);
-        res.redirect('/api/v1/usuarios/dashboardUser');
+        if(rol === 'usuario') {
+            res.redirect('/api/v1/usuarios/dashboardUser');
+        } else {
+            
+            res.redirect('/api/v1/usuarios/seccion-usuarios');
+        }
+        
     }
     catch(err){
         next(err);
