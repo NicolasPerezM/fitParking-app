@@ -15,6 +15,10 @@ router.post(
       const payload = {
         sub: user.idUsuario,
         rol: user.rol,
+        name: user.Nombres,
+        lastname: user.Apellidos,
+        email: user.CorreoElectronico,
+        phone: user.Telefono 
       };
       const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
       /*res.json({

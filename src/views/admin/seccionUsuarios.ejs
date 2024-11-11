@@ -226,38 +226,6 @@
   <script>
     // Sort functionality
 
-    // Delete user functionality
-    let userToDelete = null;
-
-    function editUser(userId) {
-      window.location.href = `/edit-user.html?id=${userId}`;
-    }
-
-    function deleteUser(userId) {
-      userToDelete = userId;
-      document.getElementById("deleteModal").classList.remove("hidden");
-    }
-
-    function closeDeleteModal() {
-      document.getElementById("deleteModal").classList.add("hidden");
-      userToDelete = null;
-    }
-
-    function confirmDelete() {
-      if (userToDelete) {
-        // Implement delete logic here
-        console.log(`Deleting user ${userToDelete}`);
-        closeDeleteModal();
-      }
-    }
-
-    // Close modal when clicking outside
-    document.getElementById("deleteModal").addEventListener("click", (e) => {
-      if (e.target === e.currentTarget) {
-        closeDeleteModal();
-      }
-    });
-
     //Fetching and populating the table
 
     const searchInput = document.querySelector("#search");
@@ -314,12 +282,12 @@
         <td class="px-6 py-4 whitespace-nowrap text-sm">
           ${user.Telefono}
         </td>
-        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <td id="btnContainer" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
           <div class="flex justify-end space-x-4">
-            <button onclick="editUser('1')" class="text-main-yellow hover:text-secundary-light">
+            <a href="/api/v1/usuarios/editar-usuario/${user.idUsuario}" class="text-main-yellow hover:text-secundary-light">
               <i class="fa-solid fa-pen-to-square text-2xl"></i>
-            </button>
-            <button onclick="deleteUser('1')" class="text-red-400 hover:text-red-300">
+            </a>
+            <button data-user-id="${user.idUsuario}" onClick="deleteUser(${user.idUsuario})" class="delete-btn text-red-400 hover:text-red-300">
               <i class="fa-solid fa-trash text-2xl"></i>
             </button>
           </div>
@@ -369,5 +337,55 @@
       // Guardar el PDF
       doc.save("reporte_usuarios.pdf");
     });
+
+    // Delete user functionality
+    async function deleteUser(idUsuario) {
+      const URL_DELETE_USER = `/api/v1/usuarios/delete/${idUsuario}`;
+
+      try {
+        // Mostrar la alerta de confirmación antes de hacer la solicitud de eliminación
+        const result = await Swal.fire({
+          title: "¿Estas seguro que quieres borrar el usuario?",
+          text: "No podrás revertir los cambios!",
+          icon: "warning",
+          iconColor: "#F6C90E",
+          background: "#1f2937",
+          showCancelButton: true,
+          confirmButtonColor: "#F6C90E",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Cancelar",
+          confirmButtonText: "Si, borrar!",
+          color: "#EEEEEE",
+        });
+
+        // Si el usuario confirma, realiza la solicitud DELETE
+        if (result.isConfirmed) {
+          const res = await fetch(URL_DELETE_USER, {
+            method: "DELETE",
+          });
+
+          // Verificar si la respuesta es exitosa
+          if (res.ok) {
+            await Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+              iconColor: "#F6C90E",
+              background: "#1f2937",
+              confirmButtonColor: "#F6C90E",
+              color: "#EEEEEE",
+            });
+
+            window.location.href = "/api/v1/usuarios/seccion-usuarios";
+          } else {
+            // Manejar errores en la respuesta de la API
+            throw new Error("Error en la respuesta de la API");
+          }
+        }
+      } catch (error) {
+        console.error("Hubo un problema al eliminar el usuario:", error);
+        alert("Error al eliminar el usuario");
+      }
+    }
   </script>
 </section>

@@ -23,6 +23,16 @@ router.get(
 );
 
 router.get(
+  "/editar-usuario/:idUsuario",
+  passport.authenticate("jwt", { session: false }),
+  checkRoles("admin"),
+  (req, res) => {
+    const user = req.user;
+    res.render("admin/editarUsuario", { layout: "./layouts/layoutAdmin", user });
+  }
+);
+
+router.get(
   "/seccion-usuarios",
   passport.authenticate("jwt", { session: false }),
   checkRoles("admin"),
@@ -36,7 +46,8 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   checkRoles("admin"),
   (req, res) => {
-    res.render("admin/dashboardAdmin", { layout: "./layouts/layoutAdmin" });
+    const nombreAdmin = req.user.name;
+    res.render("admin/dashboardAdmin", { layout: "./layouts/layoutAdmin", nombreAdmin });
   }
 );
 
@@ -68,7 +79,7 @@ router.post(
 router.delete("/delete/:idUsuario", usuariosController.deleteUser);
 
 router.patch(
-  "/update/:idUsuario",
+  "/editar-usuario/:idUsuario",
   validatorHandler(getUserSchema, "params"),
   validatorHandler(updateUserSchema, "body"),
   usuariosController.updateUser
