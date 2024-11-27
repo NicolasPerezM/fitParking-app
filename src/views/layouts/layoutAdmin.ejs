@@ -34,7 +34,7 @@
             if(!res.ok){
                 throw new Error('Error en la solicitud: ' + res.statusText)
             }
-            window.location.href = 'http://localhost:3000/' //se debe redirigir a un home y no al login
+            window.location.href = 'http://localhost:3000/login' //se debe redirigir a un home y no al login
         } catch (err) {
             console.error(err)
         }

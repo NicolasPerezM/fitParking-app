@@ -47,7 +47,7 @@ router.post(
   (req, res) => {
   res
     .clearCookie("access_token")
-    .redirect("http://localhost:3000/");
+    .redirect("http://localhost:3000/login");
 });
 
 export default router;

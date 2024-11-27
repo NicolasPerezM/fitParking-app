@@ -23,6 +23,7 @@ import { checkApiKey, checkRoles } from "../middlewares/auth.handler.js"; //chec
 import passport from "passport";
 import "./utils/auth/index.js";
 import cookieParser from "cookie-parser";
+import path from 'path'
 
 
 //Inicializaciones
@@ -45,7 +46,7 @@ app.use(expressLayouts);
 //definir el directorio
 app.set("layout", "layouts/layout");
 app.set("view engine", "ejs");
-app.set("views", join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views"));
 
 //middlewares
 app.use(morgan("dev"));

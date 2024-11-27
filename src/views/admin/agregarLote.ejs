@@ -1,0 +1,195 @@
+<section
+  class="bg-general bg-cover bg-center h-auto flex gap-5 text-secundary-light w-full"
+>
+  <div class="min-h-screen flex flex-col w-full">
+    <!-- Top Navigation -->
+    <header class="bg-main-black shadow-lg">
+      <div class="flex items-center justify-between h-16 px-4">
+        <div class="flex items-center space-x-4">
+          <a
+            href="/api/v1/usuarios/seccion-usuarios"
+            class="text-main-yellow hover:text-secundary-dark"
+          >
+            <i class="fa-solid fa-arrow-left text-2xl"></i>
+          </a>
+          <h1 class="text-xl font-bold">Crear nuevo usuario</h1>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <div class="max-w-2xl mx-auto bg-main-black rounded-lg shadow-lg p-6">
+        <form id="addLotForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-1"
+              >Lot Name</label
+            >
+            <input
+              type="text"
+              id="lotName"
+              required
+              class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-1"
+                >Capacity</label
+              >
+              <input
+                type="number"
+                id="capacity"
+                required
+                min="1"
+                class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300 mb-1"
+                >Price per Hour</label
+              >
+              <input
+                type="number"
+                id="pricePerHour"
+                required
+                min="0"
+                step="0.01"
+                class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-1"
+              >Lot Type</label
+            >
+            <select
+              id="lotType"
+              required
+              class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              <option value="covered">Covered</option>
+              <option value="open">Open</option>
+              <option value="underground">Underground</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2"
+              >Features</label
+            >
+            <div class="space-y-2">
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  name="features"
+                  value="security"
+                  class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-800"
+                />
+                <span class="ml-2 text-sm text-gray-300">24/7 Security</span>
+              </label>
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  name="features"
+                  value="camera"
+                  class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-800"
+                />
+                <span class="ml-2 text-sm text-gray-300">CCTV Cameras</span>
+              </label>
+              <label class="flex items-center">
+                <input
+                  type="checkbox"
+                  name="features"
+                  value="ev"
+                  class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500 focus:ring-offset-gray-800"
+                />
+                <span class="ml-2 text-sm text-gray-300">EV Charging</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex justify-end space-x-4 pt-4">
+            <button
+              type="button"
+              onclick="hideModal('addLotModal')"
+              class="px-4 py-2 text-gray-300 hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              Add Lot
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script>
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const URL_CREAR_USUARIO = "/api/v1/usuarios/crearUsuario";
+      const password = document.querySelector("#Contrasena").value;
+      const confirmPassword = document.querySelector(
+        "#ConfirmarContrasena"
+      ).value;
+
+      if (password !== confirmPassword) {
+        await Swal.fire({
+          title: "Las contraseñas no coinciden",
+          icon: "error",
+          iconColor: "#FF0000",
+          confirmButtonText: "Aceptar",
+          background: "#1f2937",
+          color: "#EEEEEE",
+          confirmButtonColor: "#F6C90E",
+        });
+        return;
+      }
+
+      try {
+        const bodyData = {
+          Nombres: document.querySelector("#Nombres").value,
+          Apellidos: document.querySelector("#Apellidos").value,
+          CorreoElectronico: document.querySelector("#CorreoElectronico").value,
+          Telefono: document.querySelector("#Telefono").value,
+          Contrasena: password,
+        };
+
+        const res = await fetch(URL_CREAR_USUARIO, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bodyData),
+        });
+
+        if (res.ok) {
+          await Swal.fire({
+            title: "Usuario creado con éxito",
+            icon: "success",
+            iconColor: "#F6C90E",
+            confirmButtonText: "Aceptar",
+            background: "#1f2937",
+            color: "#EEEEEE",
+            confirmButtonColor: "#F6C90E",
+          });
+          window.location.href = "/api/v1/usuarios/seccion-usuarios";
+        } else {
+          throw new Error("Error en la solicitud: " + res.statusText);
+        }
+      } catch (err) {
+        await Swal.fire({
+          title: "Error",
+          text: err.message || "No se pudo registrar el usuario.",
+          icon: "error",
+          confirmButtonText: "Reintentar",
+        });
+      }
+    });
+  </script>
+</section>

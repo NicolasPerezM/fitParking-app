@@ -1,17 +1,26 @@
 <nav class="bg-main-black h-screen sticky top-0 left-0 min-w-60 w-60 flex flex-col items-center justify-between border-r border-r-main-yellow text-lg text-secundary-light font-medium">
     <div class="flex flex-col gap-4 mt-4 w-4/5" >
-        <img src="../images/logoFitP.png" alt="" class="h-20 m-auto">
+        <!--<img src="../../public/images/logoFitP.png" alt="" class="h-20 m-auto">-->
         <ul class="flex flex-col gap-2">
             <a href="/api/v1/usuarios/dashboardAdmin"><li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500">
                 <i class="fa-solid fa-house"></i>
                 <p>Inicio</p>
             </li></a>
-            <a href="./espaciosParqueoAdmin.html">
-                <li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500">
-                    <i class="fa-solid fa-car"></i>
-                    <p>Espacios</p>
+            <button>
+                <li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500 justify-between" id="espaciosBtn">
+                    <div class="flex gap-6 items-center">
+                        <i class="fa-solid fa-car"></i>
+                        <p>Espacios</p>
+                    </div>
+                    
+                    <i class="fa-solid fa-chevron-down"></i>
                 </li>
-            </a>
+                <div id="dropdown" class="mt-2 w-48 shadow-md hidden text-left">
+                    <a href="/api/v1/lotes/seccion-lotes" class="block rounded-md hover:bg-main-yellow py-1 px-1 hover:text-black hover:font-medium transition duration-500">Lotes</a>
+                    <hr class="m-1">
+                    <a href="" class="block rounded-md hover:bg-main-yellow py-1 px-1 hover:text-black hover:font-medium transition duration-500">Espacios de parqueo</a>
+                </div>
+            </button>
             <a href="./reportesAdmin.html">
                 <li class="flex gap-6 py-1 items-center px-1 rounded-md hover:bg-main-yellow cursor-pointer hover:text-black hover:font-medium transition duration-500"">
                     <i class="fa-solid fa-ticket"></i>
@@ -59,6 +68,7 @@
         </li>
     </ul>
     <script >
+        //select menu item
         document.addEventListener('DOMContentLoaded', () => {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll('nav a');
@@ -69,5 +79,14 @@
                     }   
             });
         });
+
+        //Dropdow logic
+
+        const espaciosBtn = document.getElementById('espaciosBtn');
+        const dropdown = document.getElementById('dropdown')
+
+        espaciosBtn.addEventListener('click', () => {
+            dropdown.classList.toggle('hidden');
+        })
     </script>
 </nav>
