@@ -105,7 +105,7 @@ export const updateUser = async (req, res, next) => {
     if (!updateUser) {
       throw boom.badRequest("Usuario no actualizado");
     } else {
-        res.status(204).redirect("/api/v1/usuarios/seccion-usuarios");
+        res.sendStatus(204);
     }
   } catch (err) {
     next(err);

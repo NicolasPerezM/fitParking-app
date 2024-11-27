@@ -1,6 +1,6 @@
 1. Sección de Usuarios y Espacios
-Agregar una sección de usuarios en el panel del admin: Mostrar toda la información de los clientes registrados. ***
-Sección de "Espacios y Lotes":
+Agregar una sección de usuarios en el panel del admin: Mostrar toda la información de los clientes registrados. HECHO
+Sección de "Espacios y Lotes": EN PROCESO
 Crear y gestionar lotes y espacios de parqueo.
 Ver detalles de los distintos lotes y su capacidad.
 Editar lotes (nombre, capacidad, restricciones por tipo de vehículo).

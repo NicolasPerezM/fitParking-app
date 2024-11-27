@@ -1,122 +1,168 @@
-<section class="bg-general bg-cover bg-center h-auto flex gap-5 text-secundary-light w-full">
-    <div class="min-h-screen flex flex-col w-full">
-      <!-- Top Navigation -->
-      <header class="bg-main-black shadow-lg">
-        <div class="flex items-center justify-between h-16 px-4">
-          <div class="flex items-center space-x-4">
-            <a
+<section
+  class="bg-general bg-cover bg-center h-auto flex gap-5 text-secundary-light w-full"
+>
+  <div class="min-h-screen flex flex-col w-full">
+    <!-- Top Navigation -->
+    <header class="bg-main-black shadow-lg">
+      <div class="flex items-center justify-between h-16 px-4">
+        <div class="flex items-center space-x-4">
+          <a
             href="/api/v1/usuarios/seccion-usuarios"
             class="text-main-yellow hover:text-secundary-dark"
           >
             <i class="fa-solid fa-arrow-left text-2xl"></i>
           </a>
-            <h1 class="text-xl font-bold">Crear nuevo usuario</h1>
-          </div>
+          <h1 class="text-xl font-bold">Crear nuevo usuario</h1>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <!-- Main Content -->
-      <main class="flex-1 p-6">
-        <div class="max-w-2xl mx-auto bg-main-black rounded-lg shadow-lg p-6">
-          <form class="space-y-6">
-            <!-- Basic Information -->
-            <div class="space-y-4">
-                <h2 class="text-2xl font-medium">Información Básica</h2>
-                <article class="flex flex-col gap-4">
-                    <div class="flex justify-between gap-3 text-lg text-secundary-light">
-                        <div class="w-full">
-                          <label for="Nombres" class="block font-medium">Nombres</label>
-                          <input type="text" id="Nombres" name="Nombres" required class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm" value="<%= user.Nombres %>">
-                        </div>
-                        <div class="w-full">
-                          <label for="Apellidos" class="block font-medium text-gray-300">Aprellidos</label>
-                          <input type="text" id="Apellidos" name="Apellidos" required class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm" value="<%= user.lastname %>">
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-4">
-                        <div>
-                              <label for="CorreoElectronico" class="block font-medium">Correo Electrónico</label>
-                              <input type="email" id="CorreoElectronico" name="CorreoElectronico" required class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm" value="<%= user.email %>">
-                            </div>
-              
-                            <div>
-                              <label for="Telefono" class="block font-medium">Telefono</label>
-                              <input type="tel" id="Telefono" name="Telefono" required class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm" value="<%= user.phone %>">
-                            </div>
-                      </div>
-                </article>
-            </div>
-            <!-- Form Actions -->
-            <div class="flex justify-end space-x-4 pt-6 border-t border-gray-700">
-              <button type="button" onclick="window.location.href='/api/v1/usuarios/seccion-usuarios'" class="px-4 py-2 text-secundary-light hover:text-secundary-dark">
-                Cancelar
-              </button>
-              <button type="submit" class="px-4 py-2 outline outline-main-yellow bg-main-yellow rounded-lg hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-main-yellow focus:ring-offset-main-yellow text-main-black font-semibold hover:text-secundary-light">
-                Editar Usuario
-              </button>
-            </div>
-          </form>
-        </div>
-      </main>
-    </div>
-    <script>
-    document.querySelector('form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const URL_CREAR_USUARIO = '/api/v1/usuarios/crearUsuario';
-        const password = document.querySelector('#Contrasena').value;
-        const confirmPassword = document.querySelector('#ConfirmarContrasena').value;
-      
-        if (password !== confirmPassword) {
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <div class="max-w-2xl mx-auto bg-main-black rounded-lg shadow-lg p-6">
+        <form class="space-y-6 edit-form" id="edit-form">
+          <!-- Basic Information -->
+          <div class="space-y-4">
+            <h2 class="text-2xl font-medium">Información Básica</h2>
+            <article class="flex flex-col gap-4">
+              <div
+                class="flex justify-between gap-3 text-lg text-secundary-light"
+              >
+                <div class="w-full">
+                  <label for="Nombres" class="block font-medium">Nombres</label>
+                  <input
+                    type="text"
+                    id="Nombres"
+                    name="Nombres"
+                    required
+                    class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm"
+                    value=""
+                  />
+                </div>
+                <div class="w-full">
+                  <label for="Apellidos" class="block font-medium text-gray-300"
+                    >Aprellidos</label
+                  >
+                  <input
+                    type="text"
+                    id="Apellidos"
+                    name="Apellidos"
+                    required
+                    class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <div>
+                  <label for="CorreoElectronico" class="block font-medium"
+                    >Correo Electrónico</label
+                  >
+                  <input
+                    type="email"
+                    id="CorreoElectronico"
+                    name="CorreoElectronico"
+                    required
+                    class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm"
+                    value=""
+                  />
+                </div>
+
+                <div>
+                  <label for="Telefono" class="block font-medium"
+                    >Telefono</label
+                  >
+                  <input
+                    type="tel"
+                    id="Telefono"
+                    name="Telefono"
+                    required
+                    class="px-2 py-1 bg-main-black border border-gray-700 focus:border-main-yellow outline-none rounded-lg w-full placeholder-gray-400 text-secundary-light text-sm"
+                    value=""
+                  />
+                </div>
+              </div>
+            </article>
+          </div>
+          <!-- Form Actions -->
+          <div class="flex justify-end space-x-4 pt-6 border-t border-gray-700">
+            <button
+              type="button"
+              onclick="window.location.href='/api/v1/usuarios/seccion-usuarios'"
+              class="px-4 py-2 text-secundary-light hover:text-secundary-dark"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 outline outline-main-yellow bg-main-yellow rounded-lg hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-main-yellow focus:ring-offset-main-yellow text-main-black font-semibold hover:text-secundary-light"
+            >
+              Editar Usuario
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <script>
+    const url = window.location.pathname;
+    const idUsuario = url.split("/").pop();
+    const URL_OBTENER_USUARIO_BY_ID = `/api/v1/usuarios/${idUsuario}`;
+    const URL_EDITAR_USUARIO = `/api/v1/usuarios/editar-usuario/${idUsuario}`;
+    const editForm = document.getElementById("edit-form");
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const res = await fetch(URL_OBTENER_USUARIO_BY_ID);
+        if (!res.ok) {
+          throw new Error("Error al obtener los datos del usuario");
+        }
+        const data = await res.json();
+
+        document.getElementById("Nombres").value = data.Nombres;
+        document.getElementById("Apellidos").value = data.Apellidos;
+        document.getElementById("CorreoElectronico").value =
+          data.CorreoElectronico;
+        document.getElementById("Telefono").value = data.Telefono;
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    editForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const updatedData = {
+        Nombres: document.getElementById("Nombres").value,
+        Apellidos: document.getElementById("Apellidos").value,
+        CorreoElectronico: document.getElementById("CorreoElectronico").value,
+        Telefono: document.getElementById("Telefono").value,
+      };
+
+      try {
+        const res = await fetch(URL_EDITAR_USUARIO, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        });
+        if (res.ok) {
           await Swal.fire({
-            title: "Las contraseñas no coinciden",
-            icon: "error",
-            iconColor: "#FF0000",
-            confirmButtonText: "Aceptar",
+            title: "Actualizado",
+            text: "El usuario ha sido actualizado",
+            icon: "success",
+            iconColor: "#F6C90E",
             background: "#1f2937",
-            color: "#EEEEEE",
             confirmButtonColor: "#F6C90E",
+            color: "#EEEEEE",
           });
-          return;
+          window.location.href = "/api/v1/usuarios/seccion-usuarios";
+        } else {
+          throw new Error("Error al actualizar usuario");
         }
-      
-        try {
-          const bodyData = {
-            Nombres: document.querySelector('#Nombres').value,
-            Apellidos: document.querySelector('#Apellidos').value,
-            CorreoElectronico: document.querySelector('#CorreoElectronico').value,
-            Telefono: document.querySelector('#Telefono').value,
-            Contrasena: password,
-          };
-      
-          const res = await fetch(URL_CREAR_USUARIO, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(bodyData),
-          });
-      
-          if (res.ok) {
-            await Swal.fire({
-              title: "Usuario creado con éxito",
-              icon: "success",
-              iconColor: "#F6C90E",
-              confirmButtonText: "Aceptar",
-              background: "#1f2937",
-              color: "#EEEEEE",
-              confirmButtonColor: "#F6C90E",
-            });
-            window.location.href = "/api/v1/usuarios/seccion-usuarios";
-          } else {
-            throw new Error("Error en la solicitud: " + res.statusText);
-          }
-        } catch (err) {
-          await Swal.fire({
-            title: "Error",
-            text: err.message || "No se pudo registrar el usuario.",
-            icon: "error",
-            confirmButtonText: "Reintentar",
-          });
-        }
-      });
-    </script>
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
 </section>
