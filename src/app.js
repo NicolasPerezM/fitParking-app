@@ -62,7 +62,6 @@ app.get("/login", (req, res) => {
 });
 
 
-
 app.get(
   "/api/v1/historialParqueo/noRegistrado",
   passport.authenticate("jwt", { session: false }),

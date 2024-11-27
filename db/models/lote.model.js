@@ -22,6 +22,17 @@ const loteSchema = {
     capacidad: {
         allowNull: true,
         type: DataTypes.INTEGER
+    },
+    tipoLote: {
+        field: 'tipo_lote',
+        allowNull: false,
+        type: DataTypes.ENUM("Cubierto", "Descubierto"),
+        defaultValue: "Descubierto"
+    },
+    precioPorHora: {
+        field: 'precio_por_hora',
+        allowNull: false,
+        type: DataTypes.FLOAT
     }
 }
 

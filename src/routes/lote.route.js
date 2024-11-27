@@ -1,4 +1,4 @@
-import Router from "express";
+import {Router} from "express";
 import { methodsLote as loteController } from "../controller/lote.controller.js";
 import validatorHandler from "../../middlewares/validator.handler.js";
 import {
@@ -22,6 +22,14 @@ router.get(
   }
 );
 
+router.get('/agregar-lote',
+    passport.authenticate("jwt", { session: false }),
+    checkRoles("admin"),
+    (req, res) => {
+        res.render("admin/agregarLote", { layout: "./layouts/layoutAdmin" });
+      }
+)
+
 router.get(
   "/:idLote",
   validatorHandler(getLoteSchema, "params"),
@@ -29,7 +37,7 @@ router.get(
 );
 
 router.post(
-  "/crearLote",
+  "/crear-lote",
   validatorHandler(createLoteSchema, "body"),
   loteController.createLote
 );

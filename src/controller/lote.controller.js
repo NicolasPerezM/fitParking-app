@@ -34,8 +34,8 @@ const getLote = async(req, res, next) => {
 //create 
 const createLote = async(req, res, next) => {
     try{
-        const { nombreLote, ubicacion, capacidad} = req.body;
-        const data = {nombreLote, ubicacion, capacidad}
+        const { nombreLote, ubicacion, capacidad, tipoLote, precioPorHora} = req.body;
+        const data = {nombreLote, ubicacion, capacidad, tipoLote, precioPorHora}
         const newLote = await models.Lote.create(data);
         if(!newLote){
             throw boom.badRequest('Lote no creado');
